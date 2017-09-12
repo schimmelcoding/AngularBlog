@@ -1,0 +1,12 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}!
+  </h1>
+  <input type="text" name="username" id="username" [value]="username"
+         (input)="username" placeholder="username"/><br/>
+  <input type="password" name="password" id="password" [value]="password"
+         (input)="password" placeholder ="password"/><br/>
+  <button (click)="login()">login</button>
+  </div>
+  <p *ngFor="let username of usernames">{{username.username}}</p>
