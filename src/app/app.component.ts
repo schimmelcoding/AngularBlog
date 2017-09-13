@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BlogService } from './service/blog.service';
+import { NgModel } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,30 +10,24 @@ import { BlogService } from './service/blog.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Blog';
-  username: string = "";
-  password: string = "";
-  usernames: string[] = [];
-  constructor(private blogservice: BlogService){
-    this.blogservice = blogservice;
+  isLoginVisible: boolean = true;
 
-
-    this.blogservice.getUsernames().subscribe(data => {
-      console.log(data);
-      for(let i=0; i < data.length; i++){
-        this.usernames.push(data[i].username);
-      }
-    });
-
+  constructor(public router: Router) {
+    this.router = router;
   }
-  login(): void {
-    let dbusername: string;
-    let dbpassword: string;
-    this.blogservice.getLogin(this.username).subscribe( data => {
-      dbusername = data.username;
-      dbpassword = data.password;
-      alert(data);
-      //alert(dbpassword);
-    });
+
+  OnInit(){
+    if(this.isLoginVisible){
+      this.router.navigateByUrl('/');
+    }
   }
+
+  flipLoginButton() {
+    if(this.isLoginVisible == true) {
+      this.isLoginVisible = false;
+    } else {
+      this.isLoginVisible = true;
+    }
+  }
+
 }
