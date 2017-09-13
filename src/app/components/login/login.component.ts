@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
 
     this.blogservice.getUsernames().subscribe(data => {
       console.log(data);
-      for(let i=0; i < data.length; i++){
-        this.usernames.push(data[i].username);
-      }
+      // for(let i=0; i < data.length; i++){
+      //   this.usernames.push(data[i].username);
+      // }
     });
 
   }
@@ -34,17 +34,15 @@ export class LoginComponent implements OnInit {
   usernames: string[] = [];
 
   login(): void {
-    let dbusername: string;
-    let dbpassword: string;
+
+    alert("user: "+ this.username +", pass: " + this.password);
     this.blogservice.getLogin(this.username, this.password).subscribe( data => {
-      dbusername = data.username;
-      dbpassword = data.password;
       console.log(JSON.stringify(data));
-      if (data.role_id == 1) {
-        this.router.navigateByUrl('/admin-page');
-      } else {
-        alert("woah");
-      }
+      // if (data.role_id == 1) {
+      //   this.router.navigateByUrl('/admin-page');
+      // } else {
+      //   alert("woah");
+      // }
       //alert("user is " + dbusername + " password is " + dbpassword);
       //alert("user: " + dbusername + " pass: " + dbpassword);
 

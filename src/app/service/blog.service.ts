@@ -4,7 +4,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 @Injectable()
 export class BlogService {
-  baseurl: string = 'http://api.blog.com/api';
+  baseurl: string = 'http://www.schimmelcoding.com/api/public/api';
 
   constructor(private http: Http) {
 
@@ -13,7 +13,9 @@ export class BlogService {
   getUsernames(){
     // let usernames: string[];
     return this.http.get(this.baseurl + '/users/usernames')
-        .map((resp: Response) => resp.json());
+        .map((resp: Response) => {resp.json();
+          console.log(resp.json());
+        });
   }
 
   getLogin(username: string, password: string){
@@ -22,6 +24,6 @@ export class BlogService {
     let body = '{"username":"' + username + '", "password":"' + password + '"}';
     //alert(body);
     return this.http.post(this.baseurl + '/login', body , options)
-      .map((resp: Response) => resp.json());
+      .map((resp: Response) => console.log(resp));
     }
 }
