@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { BlogService } from './service/blog.service';
 import { NgModel } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 @Component({
   selector: 'app-root',

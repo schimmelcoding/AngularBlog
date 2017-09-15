@@ -1,0 +1,101 @@
+/* body styles */
+  body {
+      background-image: url("../../../assets/Backgrounds/space-wallpapers-12.jpg");
+      background-size: auto;
+      background-repeat: no-repeat;
+  }
+  
+  /* wrapper styles*/
+  #wrapper {
+      font-family: 'Comic Sans', Ariel;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+    
+  /*heading styles*/
+  h1 {
+      background-color: rgba(255,255,255,.4);
+      text-align: center;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  /* nav styles */
+  nav {
+      width: 250px;
+      background-color: rgba(52, 77, 82, .5);
+      padding-bottom: 7px;
+    float: left;
+    margin: 25px;
+  }
+  
+  nav h3 {
+      background-color: rgba(255,255,255,.3);
+      text-align: center;
+  }
+  
+  nav ul li {
+      list-style: none;
+  }
+    
+  nav a {
+      text-decoration: none;
+      color: white;
+  }
+    
+  nav a:visited {
+      color:white;
+  }
+    
+  nav a:hover {
+      color:rgba(255,255,255,.3);
+  }
+  
+  /* Calendar styles */
+  
+  #Calendar{
+    width: 66%;
+    float: left;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  #Calendar tr:first-of-type {
+    background-color: rgba(255, 255, 255, .3);
+  }
+  
+  #Calendar th {
+    border: 1px solid black;
+    height: auto;
+    width: 100px;
+    color: black;
+    text-align:center;
+  }
+  #Calendar td{
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  #Calendar table {
+    background-color: rgba(52, 77, 82, .5);
+      color: white;
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .current { 
+    background-color: rgba(255,255,255,.3);
+  }
+  
+  #Calendar #legend{
+    text-align: center;
+    font-size: 1.5em;
+    height: auto;
+    color: black;
+  }

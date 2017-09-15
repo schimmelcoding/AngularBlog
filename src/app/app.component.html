@@ -4,9 +4,7 @@
       <li><a style="font-family: comic-sans; font-size: 26; font-weight: bold;" [routerLink]="['/']">Schimmel Coding Blog</a></li>
     </ul>
 
-    <p *ngIf="getIsHomePage()">
-      This is the home page.
-    </p>
+    <app-landing-page *ngIf="getIsHomePage()"></app-landing-page>
 </nav>
 
 <div id="mySidenav" class="sidenav">

@@ -6,6 +6,7 @@ import { BlogService } from './service/blog.service';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 const appRoutes:Routes = [
   { path:'admin-page', component: AdminPageComponent },
@@ -18,6 +19,7 @@ const appRoutes:Routes = [
     AppComponent,
     LoginComponent,
     AdminPageComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
