@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions} from '@angular/http';
 //import { HttpClientModule } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 @Injectable()
 export class BlogService {
-  baseurl: string = 'http://api.blog.com/api';
+  baseurl: string = 'http://www.schimmelcoding.com/api/public/api';
 
   constructor(private http: Http) {
 
@@ -17,11 +17,11 @@ export class BlogService {
   }
 
   getLogin(username: string, password: string){
-    let headers = new Headers({'Content-Type':'application/json'});
-    let options = new RequestOptions({headers: headers});
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
     let body = '{"username":"' + username + '", "password":"' + password + '"}';
-    //alert(body);
-    return this.http.post(this.baseurl + '/login', body , options)
-      .map((resp: Response) => resp.json());
+    //alert(body)
+    return this.http.post(this.baseurl + '/login', body) //body, options
+      .map((resp: Response) => console.log(JSON.stringify(resp))/*resp.json()*/);
     }
 }

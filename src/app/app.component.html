@@ -1,5 +1,21 @@
-<nav><a *ngIf="isLoginVisible == true" (click)="flipLoginButton()" [routerLink]="['/login']">Login</a></nav>
-<nav><a *ngIf="isLoginVisible == false" (click)="flipLoginButton()" [routerLink]="['/login']">Logout</a></nav>
+<nav id="navbar" class="navbar">
+    <ul>
+      <li><a (click)="openNav()"><span class="glyphicon glyphicon-menu-hamburger nav-item"></span></a></li>
+      <li><a style="font-family: comic-sans; font-size: 26; font-weight: bold;" [routerLink]="['/']">Schimmel Coding Blog</a></li>
+    </ul>
+
+    <p *ngIf="getIsHomePage()">
+      This is the home page.
+    </p>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a class="nav-item" (click)="closeNav()" [routerLink]="['/']">Home</a>
+  <a *ngIf="isLoggedIn" class="nav-item" (click)="closeNav()" [routerLink]="['/admin-page']">Admin</a>
+  <a *ngIf="!isLoggedIn" class="nav-item" (click)="closeNav(); flipLoginButton(); " [routerLink]="['/login']">Login</a>
+  <a *ngIf="isLoggedIn" class="nav-item" (click)="closeNav(); flipLoginButton(); " [routerLink]="['/login']">Logout</a>
+</div>
 
 
 

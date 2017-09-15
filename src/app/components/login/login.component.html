@@ -2,9 +2,9 @@
   <h1>
     Welcome to {{title}}!
   </h1>
-  <input tabindex="1" type="text" name="username" [value]="username" id="username"
+  <input class="input" tabindex="1" type="text" name="username" [value]="username" id="username"
          (input)="username = $event.target.value" placeholder="username"/><br/>
-  <input tabindex="1" type="password" name="password" id="password" [value]="password"
+  <input class="input" tabindex="1" type="password" name="password" id="password" [value]="password"
          (input)="password = $event.target.value" (keyup.enter)="login()" placeholder ="password"/><br/>
-  <button tabindex="1" (click)="login()">login</button>
+  <button type="button" class="button" tabindex="1" (click)="login()">login</button>
   </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-admin-page',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private appComponent: AppComponent) {
+    this.router = router;
+    this.appComponent = appComponent
+  }
 
   ngOnInit() {
+    this.appComponent.getIsLoggedIn();
   }
 
 }

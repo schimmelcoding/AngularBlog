@@ -17,12 +17,12 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminPageComponent
+    AdminPageComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     BlogService
