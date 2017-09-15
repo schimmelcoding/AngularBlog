@@ -39,23 +39,20 @@ export class LoginComponent implements OnInit {
     let dbusername: string;
     let dbpassword: string;
     this.blogservice.getLogin(this.username, this.password).subscribe( data => {
-      alert(JSON.stringify(data));
-      // dbusername = data.username;
-      // dbpassword = data.password;
-      // if (this.appComponent.isLoggedIn == false) {
-      //   alert('Now logging in')
-      //   this.appComponent.flipLogin();
-      //   this.router.navigate(['/admin-page'])
-      // } else {
-      //   alert('User already logged in. Logout to sign in as another user.')
-      // }
-      // if (data.role_id == 1) {
-      //   alert("success");
-      // } else {
-      //   alert("woah");
-      // }
-      //alert("user is " + dbusername + " password is " + dbpassword);
-      //alert("user: " + dbusername + " pass: " + dbpassword);
+      dbusername = data.username;
+      dbpassword = data.password;
+      if (this.appComponent.isLoggedIn == false) {
+        console.log('Now logging in')
+        if (data.role_id == 1) {
+          this.router.navigate(['/admin-page']);
+          this.appComponent.flipLogin();
+        } else {
+          this.router.navigate(['/']);
+          this.appComponent.flipLogin();
+        }
+      } else {
+        alert('User already logged in. Logout to sign in as another user.')
+      }
     });
   }
 
