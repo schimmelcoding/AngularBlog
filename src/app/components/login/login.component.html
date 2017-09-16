@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<div style="text-align:center; vertical-align: middle">
   <h1>
     Welcome to {{title}}!
   </h1>
@@ -7,4 +7,4 @@
   <input class="input" tabindex="1" type="password" name="password" id="password" [value]="password"
          (input)="password = $event.target.value" (keyup.enter)="login()" placeholder ="password"/><br/>
   <button type="button" class="button" tabindex="1" (click)="login()">login</button>
-  </div>
+</div>

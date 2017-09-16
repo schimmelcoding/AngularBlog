@@ -4,6 +4,10 @@ import { BlogService } from './service/blog.service';
 import { NgModel } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -12,14 +16,16 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 })
 export class AppComponent {
 
-  isLoggedIn : boolean = false;
+  isLoggedIn: boolean = false;
+  isHomePage: boolean;
   @Output() public clickOutside = new EventEmitter<MouseEvent>();
 
   constructor(public router: Router, private _elementRef: ElementRef) {
     this.router = router;
   }
 
-  OnInit(){
+  ngOnInit(){
+    document.getElementsByTagName('body')[0].style.backgroundImage='url("../../../assets/Backgrounds/space-wallpapers-6.jpg")';
   }
 
   flipLogin() {
@@ -28,25 +34,19 @@ export class AppComponent {
 
   getIsLoggedIn(){
     if (this.isLoggedIn == true) { return true; }
-    this.router.navigate(['/login']);
-    return false;
+    else {
+      this.router.navigate(['/login']);
+      return false;}
   }
-
-  getIsHomePage() {
-    //regex to test if we are on root page. checking against index.html
-    var is_root =/^\/(?:|index\.aspx?)$/i.test(location.pathname);
-    return is_root;
-  }
-
-  hello(){alert("hello")}
 
   /* Set the width of the side navigation to 250px */
  openNav() {
-    document.getElementById("mySidenav").style.width = "16%";
+  document.getElementById("mySidenav").style.width = "16%";
  }
 
  /* Set the width of the side navigation to 0 */
  closeNav() {
    document.getElementById("mySidenav").style.width = "0";
  }
+
 }

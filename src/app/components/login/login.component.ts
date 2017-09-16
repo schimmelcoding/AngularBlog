@@ -4,6 +4,9 @@ import { BlogService } from '../../service/blog.service';
 import { NgModel } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../../app.component';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +15,7 @@ import { AppComponent } from '../../app.component';
 })
 export class LoginComponent implements OnInit {
 
-  url: string;
+  currentUrl: string
   title = 'Schimmel Coding Blog';
   username: string = "";
   password: string = "";
@@ -25,6 +28,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appComponent.getIsLoggedIn();
+    this.currentUrl = this.router.url;
+    console.log(this.currentUrl)
+    this.getUsernames()
+  }
+
+  getUsernames() {
     this.blogservice.getUsernames().subscribe(data => {
       console.log(data);
       for(let i=0; i < data.length; i++){
@@ -33,14 +43,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
-
   login(): void {
-    let dbusername: string;
-    let dbpassword: string;
-    this.blogservice.getLogin(this.username, this.password).subscribe( data => {
+    var dbusername: string;
+    var dbpassword: string;
+    var dbrole: number;
+
+    //use the following to use actual login checks
+    /*this.blogservice.getLogin(this.username, this.password).subscribe( data => {
       dbusername = data.username;
       dbpassword = data.password;
+      dbrole = data.role_id;
+
+      console.log("logged in as: ", JSON.stringify(data))
       if (this.appComponent.isLoggedIn == false) {
         console.log('Now logging in')
         if (data.role_id == 1) {
@@ -50,10 +64,17 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
           this.appComponent.flipLogin();
         }
-      } else {
-        alert('User already logged in. Logout to sign in as another user.')
       }
-    });
+    });*/
+
+    // below temporarily ignores login to test pages
+    if (this.appComponent.isLoggedIn == false) {
+      console.log("logging in")
+      this.appComponent.flipLogin()
+      this.router.navigate(['/admin-page'])
+    } else {
+      console.log('User already logged in. Logout to sign in as another user.')
+    }
   }
 
 }

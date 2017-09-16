@@ -1,14 +1,22 @@
+
+h1{
+    color: white;
+}
+
 .input {
-  height: auto;
+  height: 40px;
   margin: 1px;
+  padding-left: 12px;
+  padding-right: 12px;
+  text-align:left;
 }
 
 .button {
+  margin: 1px;
 	display: block;
 	font-size: 1.1em;
 	font-weight: bold;
 	text-transform: uppercase;
-
 	color: #ccc;
 	background-color: #555;
 	background: -webkit-linear-gradient(#888, #555);
@@ -21,7 +29,7 @@
   -webkit-transition: all 150ms ease;
 	transition: all 150ms ease;
   height: auto;
-  width: 161px;
+  width: 183px;
   display: table-cell;
   vertical-align: middle;
 }

@@ -1,17 +1,16 @@
 <nav id="navbar" class="navbar">
-    <ul>
-      <li><a (click)="openNav()"><span class="glyphicon glyphicon-menu-hamburger nav-item"></span></a></li>
-      <li><a style="font-family: comic-sans; font-size: 26; font-weight: bold;" [routerLink]="['/']">Schimmel Coding Blog</a></li>
-    </ul>
+  <ul>
+    <li><a (click)="openNav()"><span class="glyphicon glyphicon-menu-hamburger nav-item"></span></a></li>
+    <li><a style="font-family: comic-sans; font-size: 26; font-weight: bold;" [routerLink]="['/landing-page']">Schimmel Coding Blog</a></li>
+  </ul>
 
-    <app-landing-page *ngIf="getIsHomePage()"></app-landing-page>
 </nav>
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  <a class="nav-item" (click)="closeNav()" [routerLink]="['/']">Home</a>
+  <a class="nav-item" (click)="closeNav()" [routerLink]="['/landing-page']">Home</a>
   <a *ngIf="isLoggedIn" class="nav-item" (click)="closeNav()" [routerLink]="['/admin-page']">Admin</a>
-  <a *ngIf="!isLoggedIn" class="nav-item" (click)="closeNav(); flipLoginButton(); " [routerLink]="['/login']">Login</a>
+  <a *ngIf="!isLoggedIn" class="nav-item" (click)="closeNav();" [routerLink]="['/login']">Login</a>
   <a *ngIf="isLoggedIn" class="nav-item" (click)="closeNav(); flipLoginButton(); " [routerLink]="['/login']">Logout</a>
 </div>
 

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../../app.component';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-admin-page',
@@ -8,6 +12,7 @@ import { AppComponent } from '../../app.component';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
+  currentUrl: string
 
   constructor(private router: Router, private appComponent: AppComponent) {
     this.router = router;
@@ -15,7 +20,10 @@ export class AdminPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appComponent.getIsLoggedIn();
+    if(this.appComponent.getIsLoggedIn()){
+      this.currentUrl = this.router.url;
+      console.log(this.currentUrl)
+    }
   }
 
 }

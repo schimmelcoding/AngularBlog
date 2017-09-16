@@ -1,4 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AppComponent } from '../../app.component';
+
 
 @Component({
   selector: 'app-landing-page',
@@ -8,20 +14,26 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 export class LandingPageComponent implements OnInit {
   // calendar stuff
   date: Date = new Date();
-  day: number;
+  currentDay: number;
   month: number;
   updatedMonth:number;
   year: number;
   monthLength:number;
   months: string[];
-  startDate: Date; 
+  startDate: Date;
   startDay: number;
-  formatedDate: string;
+  formattedDate: string;
+  week1: Array<number>;
+  week2: Array<number>;
+  week3: Array<number>;
+  week4: Array<number>;
+  week5: Array<number>;
 
-  constructor() { 
+  constructor( public router: Router, private appComponent: AppComponent) {
+    this.router = router;
     // calander stuff
     this.date = new Date();
-    this.day = this.date.getDate();
+    this.currentDay = this.date.getDate();
     this.month = this.date.getMonth();
     this.updatedMonth = this.month + 1;
     this.year = this.date.getFullYear();
@@ -29,14 +41,23 @@ export class LandingPageComponent implements OnInit {
     this.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     this.startDate = new Date(this.year, this.month, 1);
     this.startDay = this.startDate.getDay();
-    this.formatedDate = this.updatedMonth + "/" + this.day + "/" + this.year;
+    this.formattedDate = this.updatedMonth + "/" + this.currentDay + "/" + this.year;
+    this.week1 = new Array();
+    this.week2 = new Array();
+    this.week3 = new Array();
+    this.week4 = new Array();
+    this.week5 = new Array();
   }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit(){
-    this.showCalendar();
+    if(this.appComponent.getIsLoggedIn()){
+      let currentUrl = this.router.url;
+      console.log(currentUrl);
+      this.showCalendar();
+      //TODO remove this
+      alert("Click on a day in the calendar to show events scheduled for that day. ---Trevor (easier to do this than commit message for this one instance) \n\n"
+            + "press ok to continue.");
+    }
   }
 
   daysInMonth(month, year) {
@@ -45,25 +66,65 @@ export class LandingPageComponent implements OnInit {
   }
 
   showCalendar(){
+    //fill month array with days
+    var dateArray = new Array();
     for (var i = 0; i < this.startDay; i++){
-      document.write("<td></td>");
+      dateArray[i] = null;
     }
     for (var i = 1; i <= this.monthLength; i++){
-      if( i == this.day) {
-        document.write("<td id='day" + i + "' class='current'>"+ i + "</td>");
-      }
-      else {
-        document.write("<td id='day"+i+"'>" +i+ "</td>");
-      }
-      if((i + this.startDay) % 7 == 0){
-        document.write("</tr><tr>");
+      dateArray.push(i)
+    }
+
+    // fill individual weeks of calendar
+    for (var i = 0; i <= 6; i++) {
+      this.week1[i] = dateArray[i];
+      if( this.week1[i] == this.currentDay) {
+        alert("today is the: " + this.currentDay);
       }
     }
-    if ((this.monthLength + this.startDay) % 7 != 0){
-      for (i=0; ((i + this.startDay + this.monthLength) % 7) > 0; i++){
-        document.write("<td></td>");
+    for (var i = 7; i <= 13; i++) {
+      this.week2[i-7] = dateArray[i];
+      if( this.week2[i-7] == this.currentDay) {
+        alert("today is the: " + this.currentDay);
       }
-      
+    }
+    for (var i = 14; i <= 20; i++) {
+      this.week3[i-14] = dateArray[i];
+      if( this.week3[i-14] == this.currentDay) {
+        console.log(this.week3.indexOf(this.week3[i-14]) + "(day " + this.currentDay + ")  is today");
+      }
+    }
+    for (var i = 21; i <= 27; i++) {
+      this.week4[i-21] = dateArray[i];
+      if( this.week4[i-21] == this.currentDay) {
+        alert("today is the: " + this.currentDay);
+      }
+    }
+    for (var i = 28; i <= 34; i++) {
+      this.week5[i-28] = dateArray[i];
+      if( this.week5[i-28] == this.currentDay) {
+        alert("today is the: " + this.currentDay);
+      }
+    }
+
+  }
+
+  getCurrent(day: number){
+    return day == this.currentDay;
+  }
+
+  getEvents(day?: number){
+    if (day == this.currentDay-1){
+      alert("No events scheduled for yesterday (" + this.months[this.month] + " " + day + ", " + this.year + ").");
+    }
+    else if (day == this.currentDay){
+      alert("No events scheduled for today (" + this.months[this.month] + " " + day + ", " + this.year + ").");
+    }
+    else if (day == this.currentDay+1){
+      alert("No events scheduled for tomorrow (" + this.months[this.month] + " " + day + ", " + this.year + ").");
+    }
+    else if (day != null) {
+      alert("No events scheduled for " + this.months[this.month] + " " + day + ", " + this.year + ".");
     }
   }
 }

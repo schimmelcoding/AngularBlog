@@ -10,7 +10,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 
 const appRoutes:Routes = [
   { path:'admin-page', component: AdminPageComponent },
-  { path:'login', component: LoginComponent }
+  { path:'login', component: LoginComponent },
+  { path: 'landing-page', component: LandingPageComponent}
 
 ];
 
