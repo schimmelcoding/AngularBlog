@@ -124,6 +124,7 @@ export class AppComponent {
   search(){
     // dont do anything but clear past results if no string entered
     if(this.searchString == '' || !this.searchString.trim().length) {
+      this.resetResults()
       return;
     }
 
@@ -133,46 +134,56 @@ export class AppComponent {
     var numOfResults = 0;
 
     // just a temp array for proof of concept
-    var tempArray: string[] = [ "me","me","me YOU", "YES", "PERHAPS", "this is a test string",
+    var tempArray: string[] = [ "me","me","me YOU", "you ME", "YES", "PERHAPS", "this is a test string",
                                 "slow algorithms", "efficient algorithms be damned", "youtube",
-                                "angular2", "2+2", "green", "red", "YEEyee", "LOL", "SePpYDoNtBrEaKtHiSpLS",
-                                "running out of phrases", "Java still better", "McGraw Hill Suxx"
+                                "angular2", "2 + 2 = fish", "green", "red", "YEEyee", "LOL", "SePpYDoNtBrEaKtHiSpLS",
+                                "running out of phrases", "Java still better", "McGraw Hill Suxx", "st    upid     us    Er"
                               ];
+    // this loop will see only if EXACT match. if exact match, don't do keyword search
+    for (var i = 0; i < tempArray.length; i++) {
+      if (tempArray[i].toUpperCase() == this.searchString.toUpperCase()){
+        if (!(this.resultArray.indexOf(tempArray[i]) >= 0)){
+          this.resultArray.push(tempArray[i]);
+          numOfResults++;
+        }
+      }
+    }
     // TODO: uncomment line below for actual use
      //tempArray = this.testArray;
 
     // start actual search --- a.k.a. the fun stuff
-    this.searchString = this.searchString.trim();                       // First, remove leading/trailing "white space" from search string.
-    this.searchWords = this.searchString.split(" ");                    // Take string we entered in search, and break it up.
-    var upperArray = new Array();                                       // Next, we make an UPPERCASE COPY for both what we entered,for consistency,
-    for(var i = 0; i < tempArray.length; i++){                          //     AND of what we're searching in, for consistency.
-      if (tempArray[i].length){
-        upperArray[i] = tempArray[i].toUpperCase();                     // We keep both in copy arrays to return original value later.
-        upperArray[i].replace(/ /g,'');
+    if (numOfResults == 0){
+      this.searchString = this.searchString.trim();                       // First, remove leading/trailing "white space" from search string.
+      this.searchWords = this.searchString.split(" ");                    // Take string we entered in search, and break it up.
+      var upperArray = new Array();                                       // Next, we make an UPPERCASE COPY for both what we entered,for consistency,
+      for(var i = 0; i < tempArray.length; i++){                          //     AND of what we're searching in, for consistency.
+        if (tempArray[i].length){
+          upperArray[i] = tempArray[i].toUpperCase();                     // We keep both in copy arrays to return original value later.
+          upperArray[i].replace(/ /g,'');
+        }
       }
-    }
-    var upperCaseSearchWords = new Array();
-    for(var i = 0; i < this.searchWords.length; i++){
-      if (this.searchWords[i].length){
-        upperCaseSearchWords[i] = this.searchWords[i].toUpperCase();
-        upperCaseSearchWords[i] = upperCaseSearchWords[i].replace(/ /g,'');
+      var upperCaseSearchWords = new Array();
+      for(var i = 0; i < this.searchWords.length; i++){
+        if (this.searchWords[i].length){
+          upperCaseSearchWords[i] = this.searchWords[i].toUpperCase();
+          upperCaseSearchWords[i] = upperCaseSearchWords[i].replace(/ /g,'');
+        }
       }
-    }
 
-    for (var i = 0; i < upperCaseSearchWords.length; i++){              // Then, for each word in the string we entered,
-      for (var j = 0; j < upperArray.length; j++){                      //    look at each index in array we're searching in (e.g., names of articles).
-        var wordsInString = upperArray[j].split(" ");                   // Break that index into array of words,
-        for(var k = 0; k < wordsInString.length; k++){                  //    then for each word,
-          if (wordsInString[k].indexOf(upperCaseSearchWords[i]) > -1) { //    if it contains the current "searchWord",
-            if(!(this.resultArray.indexOf(tempArray[j]) >= 0)) {        //    and hasn't already been added to results
-              this.resultArray.push(tempArray[j]);                      //    add it to our results,
-              numOfResults++;                                           //    increase reult num, and continue
+      for (var i = 0; i < upperCaseSearchWords.length; i++){              // Then, for each word in the string we entered,
+        for (var j = 0; j < upperArray.length; j++){                      //    look at each index in array we're searching in (e.g., names of articles).
+          var wordsInString = upperArray[j].split(" ");                   // Break that index into array of words,
+          for(var k = 0; k < wordsInString.length; k++){                  //    then for each word,
+            if (wordsInString[k].indexOf(upperCaseSearchWords[i]) > -1) { //    if it contains the current "searchWord",
+              if(!(this.resultArray.indexOf(tempArray[j]) >= 0)) {        //    and hasn't already been added to results
+                this.resultArray.push(tempArray[j]);                      //    add it to our results,
+                numOfResults++;                                           //    increase reult num, and continue
+              }
             }
           }
         }
       }
     }
-
     numOfResults ==  0 ? this.emptyResults = true : this.emptyResults = false;
     console.log("Results found: " + numOfResults);
     console.log("Search terms: " + this.searchString);

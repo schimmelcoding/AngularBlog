@@ -4,7 +4,7 @@
     <li><a tabindex="2" style="font-family: comic-sans; font-size: 14pt; font-weight: bold; outline:none" (keyup.enter)="closeNav()" (click)="closeNav()" [routerLink]="['/home']">Schimmel Coding Blog</a></li>
     <li>
       <div class="search" (click)="closeNav()">
-        <input (click)="closeNav()" tabindex="1" id="search" style="width: 260px; outline: none" type="text" class="form-control search-box" placeholder="search schimmelcoding" ngControl="searchString" [(ngModel)]="searchString" (keyup.enter)="closeNav(); search()">
+        <input (click)="closeNav()" tabindex="1" id="search" style="width: 260px; outline: none" type="text" class="form-control search-box" placeholder="search schimmelcoding" ngControl="searchString" [(ngModel)]="searchString" (ngModelChange)=search() (keyup.enter)="closeNav(); search()">
       </div>
     </li>
     <li><button *ngIf="searchString!=null && searchString!=''" class="glyphicon glyphicon-search" tabindex="1" id="search-button" (click)="closeNav(); resetResults(); search()"></button></li>
