@@ -1,22 +1,61 @@
+/* removes blue outline of these elements when focused bc it's ugly*/
+/*input:focus,
+select:focus,
+textarea:focus,
+button:focus,
+[contenteditable="true"]:focus {
+    outline: none;
+}*/
 
 h1{
     color: white;
 }
 
+.invalid{
+  border-style: solid;
+  border-color: red;
+}
+
+.link{
+  color: #337ab7;
+}
+.link:hover{
+  color: #2de2ff;
+}
+
+input::-webkit-input-placeholder {
+  color: gray !important;
+  font-style: italic;
+  font-weight: bolder;
+  font-family:fantasy;
+}
+.input:focus{
+
+}
+
 .input {
   height: 40px;
+  width: 180px;
   margin: 1px;
   padding-left: 12px;
   padding-right: 12px;
   text-align:left;
+  color: black;
+}
+.not-empty {
+  border-color: none;
+  border-style: none;
 }
 
 .button {
-  margin: 1px;
+  margin: 2px;
 	display: block;
 	font-size: 1.1em;
 	font-weight: bold;
-	text-transform: uppercase;
+  font-size: 12pt;
+  padding-top: 6px;
+  text-transform: uppercase;
+  text-align:center;
 	color: #ccc;
 	background-color: #555;
 	background: -webkit-linear-gradient(#888, #555);
@@ -29,7 +68,7 @@ h1{
   -webkit-transition: all 150ms ease;
 	transition: all 150ms ease;
   height: auto;
-  width: 183px;
+  width: 180px;
   display: table-cell;
   vertical-align: middle;
 }

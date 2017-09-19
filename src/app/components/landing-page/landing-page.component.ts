@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { FlashMessagesService } from 'ngx-flash-messages';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../../app.component';
@@ -13,6 +14,7 @@ import { AppComponent } from '../../app.component';
 })
 export class LandingPageComponent implements OnInit {
   // calendar stuff
+  currentUrl:  String;
   date: Date = new Date();
   currentDay: number;
   month: number;
@@ -29,8 +31,10 @@ export class LandingPageComponent implements OnInit {
   week4: Array<number>;
   week5: Array<number>;
 
-  constructor( public router: Router, private appComponent: AppComponent) {
+  constructor( public router: Router, private appComponent: AppComponent, private flashMessagesService: FlashMessagesService) {
     this.router = router;
+    this.currentUrl = this.router.url;
+    console.log(this.currentUrl);
     // calander stuff
     this.date = new Date();
     this.currentDay = this.date.getDate();
@@ -50,14 +54,21 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.appComponent.getIsLoggedIn()){
-      let currentUrl = this.router.url;
-      console.log(currentUrl);
-      this.showCalendar();
-      //TODO remove this
-      alert("Click on a day in the calendar to show events scheduled for that day. ---Trevor (easier to do this than commit message for this one instance) \n\n"
-            + "press ok to continue.");
+    this.appComponent.resetResults()
+    if(this.appComponent.getIsLoggedIn() == false){
+      this.instructLogin();
+      this.currentUrl = this.router.url;
+      console.log(this.currentUrl)
+      this.router.navigate(['/login']);
     }
+    else this.showCalendar();
+  }
+
+  instructLogin(){
+    this.flashMessagesService.show('Not logged in. Please login to view content.', {
+      classes: ['alert-info'],
+      timeout: 4000, //default is 3000
+    });
   }
 
   daysInMonth(month, year) {
@@ -79,41 +90,37 @@ export class LandingPageComponent implements OnInit {
     for (var i = 0; i <= 6; i++) {
       this.week1[i] = dateArray[i];
       if( this.week1[i] == this.currentDay) {
-        alert("today is the: " + this.currentDay);
       }
     }
     for (var i = 7; i <= 13; i++) {
       this.week2[i-7] = dateArray[i];
       if( this.week2[i-7] == this.currentDay) {
-        alert("today is the: " + this.currentDay);
       }
     }
     for (var i = 14; i <= 20; i++) {
       this.week3[i-14] = dateArray[i];
       if( this.week3[i-14] == this.currentDay) {
-        console.log(this.week3.indexOf(this.week3[i-14]) + "(day " + this.currentDay + ")  is today");
       }
     }
     for (var i = 21; i <= 27; i++) {
       this.week4[i-21] = dateArray[i];
       if( this.week4[i-21] == this.currentDay) {
-        alert("today is the: " + this.currentDay);
       }
     }
     for (var i = 28; i <= 34; i++) {
       this.week5[i-28] = dateArray[i];
       if( this.week5[i-28] == this.currentDay) {
-        alert("today is the: " + this.currentDay);
       }
     }
 
   }
 
-  getCurrent(day: number){
+  getCurrent(day?: number){
     return day == this.currentDay;
   }
 
   getEvents(day?: number){
+    this.appComponent.closeNav();
     if (day == this.currentDay-1){
       alert("No events scheduled for yesterday (" + this.months[this.month] + " " + day + ", " + this.year + ").");
     }

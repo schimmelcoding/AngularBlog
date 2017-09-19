@@ -1,18 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FlashMessagesModule } from 'ngx-flash-messages';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { BlogService } from './service/blog.service';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 const appRoutes:Routes = [
-  { path:'admin-page', component: AdminPageComponent },
+  { path:'admin', component: AdminPageComponent },
   { path:'login', component: LoginComponent },
-  { path: 'landing-page', component: LandingPageComponent}
-
+  { path: 'home', component: LandingPageComponent},
 ];
 
 @NgModule({
@@ -26,6 +27,8 @@ const appRoutes:Routes = [
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    FormsModule,
+    FlashMessagesModule,
   ],
   providers: [
     BlogService

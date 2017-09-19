@@ -1,20 +1,36 @@
 <nav id="navbar" class="navbar">
   <ul>
-    <li><a (click)="openNav()"><span class="glyphicon glyphicon-menu-hamburger nav-item"></span></a></li>
-    <li><a style="font-family: comic-sans; font-size: 26; font-weight: bold;" [routerLink]="['/landing-page']">Schimmel Coding Blog</a></li>
+    <li><a tabindex="3" (keyup.enter)="openNav()" (click)="openNav()"><div class="glyphicon glyphicon-menu-hamburger"></div></a></li>
+    <li><a tabindex="2" style="font-family: comic-sans; font-size: 14pt; font-weight: bold; outline:none" (keyup.enter)="closeNav()" (click)="closeNav()" [routerLink]="['/home']">Schimmel Coding Blog</a></li>
+    <li>
+      <div class="search" (click)="closeNav()">
+        <input (click)="closeNav()" tabindex="1" id="search" style="width: 260px; outline: none" type="text" class="form-control search-box" placeholder="search schimmelcoding" ngControl="searchString" [(ngModel)]="searchString" (keyup.enter)="closeNav(); search()">
+      </div>
+    </li>
+    <li><button *ngIf="searchString!=null && searchString!=''" class="glyphicon glyphicon-search" tabindex="1" id="search-button" (click)="closeNav(); resetResults(); search()"></button></li>
   </ul>
-
 </nav>
 
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  <a class="nav-item" (click)="closeNav()" [routerLink]="['/landing-page']">Home</a>
-  <a *ngIf="isLoggedIn" class="nav-item" (click)="closeNav()" [routerLink]="['/admin-page']">Admin</a>
-  <a *ngIf="!isLoggedIn" class="nav-item" (click)="closeNav();" [routerLink]="['/login']">Login</a>
-  <a *ngIf="isLoggedIn" class="nav-item" (click)="closeNav(); flipLoginButton(); " [routerLink]="['/login']">Logout</a>
+<!-- first div is for is there ARE search results, second is if there aren't-->
+<div *ngIf="resultArray.length>0" style="text-align: center; color: white; background-color: #333; margin-top: -22px; padding: 5px; margin-left:1px">
+  <p style="font-weight: bolder; font-size: 14pt; text-decoration: underline;">Results: <br></p>
+  <p class="link" style="cursor: pointer;" *ngFor="let item of resultArray" (click)="navigateToResult($event)">{{item}}</p>
+</div>
+<div *ngIf="resultArray.length<1 && emptyResults" style="text-align: center; color: white; background-color: #333; margin-top: -22px; padding: 5px; margin-left:1px">
+  <p class="link" id="noResults">No results</p>
 </div>
 
+<ngx-flash-messages *ngIf="!isLoggedIn"></ngx-flash-messages>
 
+<div (click)="resetResults(); closeNav()">
+  <router-outlet></router-outlet>
+</div>
 
-<!-- keep for stuff -->
-<router-outlet></router-outlet>
+<span id="mySidenav" class="sidenav">
+  <a class="closebtn"><span href="javascript:void(0)" style="height: 1px;" (keyup.enter)="closeNav()" (click)="closeNav()" tabindex="4">&times;</span></a>
+  <a class="nav-item" tabindex="3" (keyup.enter)="closeNav(); resetResults(); focusSearch()" style="margin-top: 65px;" (click)="closeNav(); focusSearch()">Search</a>
+  <a class="nav-item" tabindex="3" (click)="closeNav()" [routerLink]="['/home']">Home</a>
+  <a *ngIf="isLoggedIn" tabindex="3" class="nav-item" (click)="closeNav()" [routerLink]="['/admin']">Admin</a>
+  <a *ngIf="!isLoggedIn" class="nav-item" (click)="closeNav();" [routerLink]="['/login']">Login</a>
+  <a *ngIf="isLoggedIn" tabindex="3" class="nav-item" (click)="closeNav(); flipLoginButton(); " [routerLink]="['/login']">Logout</a>
+</span>

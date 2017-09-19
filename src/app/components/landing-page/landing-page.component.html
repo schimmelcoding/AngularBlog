@@ -40,11 +40,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td *ngFor="let days of week1; let i = index;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
-        <tr><td *ngFor="let days of week2; let i = index;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
-        <tr><td *ngFor="let days of week3; let i = index;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
-        <tr><td *ngFor="let days of week4; let i = index;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
-        <tr><td *ngFor="let days of week5; let i = index;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
+        <tr><td *ngFor="let days of week1;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
+        <tr><td *ngFor="let days of week2;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
+        <tr><td *ngFor="let days of week3;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
+        <tr><td *ngFor="let days of week4;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
+        <tr><td *ngFor="let days of week5;" (click)="getEvents(days)" [ngClass]="{'current': getCurrent(days)}"><span *ngIf="days != null">{{days}}</span></td></tr>
       </tbody>
     </table>
   </article>

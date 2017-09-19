@@ -1,10 +1,24 @@
-<div style="text-align:center; vertical-align: middle">
+<div style="text-align:center; vertical-align: middle; margin-top: 5%;">
   <h1>
     Welcome to {{title}}!
   </h1>
-  <input class="input" tabindex="1" type="text" name="username" [value]="username" id="username"
-         (input)="username = $event.target.value" placeholder="username"/><br/>
-  <input class="input" tabindex="1" type="password" name="password" id="password" [value]="password"
-         (input)="password = $event.target.value" (keyup.enter)="login()" placeholder ="password"/><br/>
-  <button type="button" class="button" tabindex="1" (click)="login()">login</button>
+  <p id="invalid-text" style="color: red; "*ngIf="invalidLogin">username or password incorrect, please try again.</p>
+  <div style="text-align: center;">
+    <input class="input" [ngClass]="{invalid: emptyUser, 'not-empty': username!=''}" tabindex="1" type="text" name="username" [(ngModel)]="username" id="username"
+           ngControl="username" placeholder="username"/>
+  </div>
+  <div style="text-align: center;">
+    <input class="input" [ngClass]="{invalid: emptyPass, 'not-empty': password!=''}" tabindex="1" type="password" name="password" id="password" [(ngModel)]="password"
+           ngControl="password" (keyup.enter)="login()" placeholder ="password"/>
+  </div>
+
+  <button type="button" class="button" id="btnLogin" tabindex="1" (click)="login()">Login</button>
+  <!-- TODO to be used for debugging actual login at later date -->
+  <!-- <div *ngIf="invalidLogin" style="color:white;">invalid login</div> -->
+
+  <div class="" style="padding-top: 3px;">
+    <a tabindex="1" class="link" style="font-weight: bold;" href="http://apps.thecodepost.org/trex/trex.html" (cick)="appComponentcloseNav()" (keyup.enter)="closeNav()">register</a>
+    <span style="color: white;">&nbsp;|&nbsp;</span>
+    <a tabindex="1" class="link" style="font-weight: bold;" href="http://apps.thecodepost.org/trex/trex.html" (click)="closeNav()" (keyup.enter)="closeNav()">forgot password</a>
+  </div>
 </div>

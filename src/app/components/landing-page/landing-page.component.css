@@ -91,13 +91,13 @@
     background-color: rgba(255,255,255,.3);
     text-align: center;
   }
-  .schedule{
+  /*.schedule{
     color: white;
     float: left;
     left: 5%;
     position: relative;
     top: 40%;
-  }
+  }*/
 
   #Calendar #legend{
     text-align: center;
