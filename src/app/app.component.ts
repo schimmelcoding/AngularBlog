@@ -9,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+//import { TrieSearch } from '../../node_modules/trie-search';
+// import { TrieNode } from './model/trie';
 
 
 
@@ -21,6 +23,7 @@ import { CommonModule } from '@angular/common';
     },
 })
 export class AppComponent {
+  //static root: TrieNode = new TrieNode();
   testArray: string[] = new Array();
   searchWords: string[] = new Array();
   resultArray: Array<string> = new Array();
@@ -99,16 +102,17 @@ export class AppComponent {
   }
   /* end of navbar specific functions */
 
-  navigateToResult(event){
-    console.log(event.target.innerText);
-    this.resultArray = new Array();
+  navigateToResult(location: string){
+    console.log(location);
+    this.resetResults();
+    this.searchString = '';
     // this.flashMessagesService.show(event.target.innerText, {
     //     classes: ['alert-danger'],
     //     timeout: 4000, //default is 3000
     //   });
-    if (event.target.innerText!="No results found."){
-      if(this.testArray.indexOf(event.target.innerText) >-1){
-        this.router.navigate(['/'+event.target.innerText]);
+    if (location != "No results found."){
+      if(this.testArray.indexOf(location) >-1){
+        this.router.navigate(['/'+location]);
       }
     }
   }
@@ -203,4 +207,84 @@ export class AppComponent {
   //
   // }
 
+  tree(){
+    //clear previous results before search
+    console.clear();
+    this.resetResults();
+
+    // var arr = [
+    //   {name: 'andrew', age: 21},
+    //   {name: 'andy', age: 37},
+    //   {name: 'andr aamm', age: 25},
+    //   {name: 'an ne tte', age: 67}
+    // ];
+    var TrieSearch = require('trie-search');
+    var arr = [ {name: "me"},
+                {name: "me YOU"},
+                {name: "you ME"},
+                {name: "hE"},
+                {name: "sHe"},
+                {name: "w3"},
+                {name: "WOMBO"},
+                {name: "YES"},
+                {name: "PERHAPS"},
+                {name: "this is a test string"},
+                {name: "slow algorithms"},
+                {name: "efficient algorithms be damned"},
+                {name: "youtube"},
+                {name: "angular2"},
+                {name: "2 + 2 = fish"},
+                {name: "green"},
+                {name: "red"},
+                {name: "YEEyee"},
+                {name: "LOL"},
+                {name: "SePpYDoNtBrEaKtHiSpLS"},
+                {name: "running out of phrases"},
+                {name: "Java still better"},
+                {name: "McGraw Hill Suxx"},
+                {name: "st    upid     us    Er"}
+    ];
+
+    var ts = new TrieSearch('name');
+
+    ts.addAll(arr);
+
+    /*
+     TODO current seach method is akin to autocomplete (matching starting at first matching word.
+     change this to look at each search work for keyword serch
+    */
+
+    // search and add results to resultArray for display purposes
+    var res = ts.get(this.searchString);
+    var numOfResults: number = 0;
+    for(var i = 0, j = 4; i < res.length; i++){
+      //should limit results to 4
+      if(i == j) {
+        break;
+      } else {
+        if(!(this.resultArray.indexOf(res[i].name) >= 0)) {
+          console.log(res[i].name);
+          this.resultArray.push(res[i].name);
+          numOfResults++;
+        }
+      }
+    }
+    // show results box
+    if (numOfResults > 0) {
+      document.getElementById('resultsBox').style.height = "auto";
+      document.getElementById('resultsBox').style.width = "260px";
+    } else {
+      document.getElementById('resultsBox').style.height = "0";
+      document.getElementById('resultsBox').style.width = "0";
+    }
+  }
+
+  underlineResult(text: string){
+    var elem = document.getElementById('resultItem'+text);
+    elem.style.textDecoration = "underline";
+  }
+  removeUnderlineFromResult(text: string){
+    var elem = document.getElementById('resultItem'+text);
+    elem.style.textDecoration = "none";
+  }
 }
