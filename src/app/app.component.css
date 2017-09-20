@@ -7,6 +7,9 @@ button:focus,
 [contenteditable="true"]:focus {
     outline: none;
 }*/
+.hidden{
+  visibility: hidden;
+}
 .link{
   color: white;
 }
@@ -93,11 +96,11 @@ li a div:hover {
 /* search results box */
 #resultsBox {
   height: 0; /* change with javascript  */
-  width: 0; /*0 width - change this with JavaScript */
+  width: 260px; /*0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 2; /* Stay on top */
   top: 0;
-  left: 273px;
+  /*left: 273px; probabaly not necessary to put here, just keeping in case for now */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   text-align: justify;

@@ -52,12 +52,24 @@ export class AppComponent {
   }
 
   ngOnInit(){
+    this.loadBrowserSpecificCSS();
     // cool background is cool
     document.getElementsByTagName('body')[0].style.backgroundImage='url("../../../assets/Backgrounds/space-wallpapers-6.jpg")';
     if(this.getIsLoggedIn()){
       console.log(this.testArray);
     }
     this.router.navigate(['/login']);
+  }
+  //separating this in case the future calls for it
+  loadBrowserSpecificCSS(){var userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent .indexOf('safari')!=-1){
+      if(userAgent .indexOf('chrome')  > -1){
+        document.getElementById('resultsBox').style.left = "273px";
+      }else{
+        //browser is safari, add css
+        document.getElementById('resultsBox').style.left = "276px";
+      }
+    }
   }
 
   flipLogin() {
@@ -211,6 +223,7 @@ export class AppComponent {
     //clear previous results before search
     console.clear();
     this.resetResults();
+    document.getElementById('resultsBox').style.visibility = "hidden";
 
     // var arr = [
     //   {name: 'andrew', age: 21},
@@ -232,6 +245,12 @@ export class AppComponent {
                 {name: "slow algorithms"},
                 {name: "efficient algorithms be damned"},
                 {name: "youtube"},
+                {name: "an"},
+                {name: "ang"},
+                {name: "angu"},
+                {name: "angul"},
+                {name: "angula"},
+                {name: "angular"},
                 {name: "angular2"},
                 {name: "2 + 2 = fish"},
                 {name: "green"},
@@ -273,9 +292,7 @@ export class AppComponent {
     if (numOfResults > 0) {
       document.getElementById('resultsBox').style.height = "auto";
       document.getElementById('resultsBox').style.width = "260px";
-    } else {
-      document.getElementById('resultsBox').style.height = "0";
-      document.getElementById('resultsBox').style.width = "0";
+      document.getElementById('resultsBox').style.visibility = "visible";
     }
   }
 

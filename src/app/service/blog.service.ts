@@ -4,7 +4,7 @@ import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 @Injectable()
 export class BlogService {
-  baseurl: string = 'http://www.schimmelcoding.com/api/public/api';
+  baseurl: string = 'https://www.schimmelcoding.com/api/public/api';
 
   constructor(private http: Http) {
 

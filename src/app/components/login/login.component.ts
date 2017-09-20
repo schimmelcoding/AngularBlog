@@ -73,48 +73,61 @@ export class LoginComponent implements OnInit {
     var dbrole: number;
 
     //use the following to use actual login checks
-    /*this.blogservice.getLogin(this.username, this.password).subscribe( data => {
-      dbusername = data.username;
-      dbpassword = data.password;
-      dbrole = data.role_id;
-
-      console.log("logged in as: ", JSON.stringify(data))
-      if (this.appComponent.isLoggedIn == false) {
-        console.log('Now logging in')
-        if (data.role_id == 1) {
-          this.router.navigate(['/admin-page']);
-          this.appComponent.flipLogin();
-        } else {
-          this.router.navigate(['/landing-page']);
-          this.appComponent.flipLogin();
-        }
-      }
-    });*/
-
-    // below temporarily ignores login to test pages
+    // uses service to connect to server and verify login
     if (this.appComponent.isLoggedIn == false) {
       console.log(this.appComponent.isLoggedIn)
       if(this.checkCreds()){
-        if (this.username == "gg"){
-          this.invalidLogin = true;
-          this.username = null;
-          this.password = null;
-          this.instructLogin('Username or password incorrect. Please try again.');
-          if(this.username == null){
-            document.getElementById('username').focus();
+        this.blogservice.getLogin(this.username, this.password).subscribe( data => {
+          dbusername = data.username;
+          dbpassword = data.password;
+          dbrole = data.role_id;
+
+          console.log("logged in as: ", JSON.stringify(data));
+          if (this.appComponent.isLoggedIn == true) {
+            console.log('Now logging in')
+            this.appComponent.flipLogin()
+            // TODO say who logged in as?
+            this.router.navigate(['/home']);
+          } else {
+            this.invalidLogin = true;
+            this.username = null;
+            this.password = null;
+            this.instructLogin('Username or password incorrect. Please try again.');
+            if(this.username == null)
+              document.getElementById('username').focus();
+            else if(this.password == null)
+              document.getElementById('password').focus();
           }
-          else if(this.password == null){
-            document.getElementById('password').focus();
-          }
-        } else {
-          console.log("logging in");
-          this.appComponent.flipLogin();
-          console.log(this.appComponent.isLoggedIn)
-          this.router.navigate(['/home'])
-        }
+        })
       }
     }
+
+
+    //below temporarily ignores login to test pages
+    // if (this.appComponent.isLoggedIn == false) {
+    //   console.log(this.appComponent.isLoggedIn)
+    //   if(this.checkCreds()){
+    //     if (this.username == "gg"){
+    //       this.invalidLogin = true;
+    //       this.username = null;
+    //       this.password = null;
+    //       this.instructLogin('Username or password incorrect. Please try again.');
+    //       if(this.username == null){
+    //         document.getElementById('username').focus();
+    //       }
+    //       else if(this.password == null){
+    //         document.getElementById('password').focus();
+    //       }
+    //     } else {
+    //       console.log("logging in");
+    //       this.appComponent.flipLogin();
+    //       console.log(this.appComponent.isLoggedIn)
+    //       this.router.navigate(['/home'])
+    //     }
+    //   }
+    // }
   }
+
 
   //display red flash message for 100 seconds at incorrect login
   instructLogin(text: string){

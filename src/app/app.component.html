@@ -12,7 +12,7 @@
 </nav>
 
 <!-- search results section -->
-<span id="resultsBox">
+<span [ngClass]="{hidden: searchString=='' || resultArray.length<1}" id="resultsBox">
   <span *ngIf="resultArray.length>0" class="resultHeader">Articles <br></span>
   <!-- the following is to place results in a pretty box, hidden until needed -->
   <span *ngIf="resultArray.length>0">
@@ -41,7 +41,7 @@
 
 <span id="mySidenav" class="sidenav">
   <a class="closebtn"><span href="javascript:void(0)" style="height: 1px;" (keyup.enter)="closeNav()" (click)="closeNav()" tabindex="4">&times;</span></a>
-  <a class="nav-item" tabindex="3" (keyup.enter)="closeNav(); resetResults(); focusSearch()" style="margin-top: 65px;" (click)="closeNav(); focusSearch()">Search</a>
+  <a *ngIf="isLoggedIn" class="nav-item" tabindex="3" (keyup.enter)="closeNav(); resetResults(); focusSearch()" style="margin-top: 65px;" (click)="closeNav(); focusSearch()">Search</a>
   <a class="nav-item" tabindex="3" (click)="closeNav()" [routerLink]="['/home']">Home</a>
   <a *ngIf="isLoggedIn" tabindex="3" class="nav-item" (click)="closeNav()" [routerLink]="['/admin']">Admin</a>
   <a *ngIf="!isLoggedIn" class="nav-item" (click)="closeNav();" [routerLink]="['/login']">Login</a>
