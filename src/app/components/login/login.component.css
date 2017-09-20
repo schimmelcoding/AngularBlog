@@ -10,7 +10,9 @@ button:focus,
 h1{
     color: white;
 }
-
+.hidden{
+  visibility: hidden;
+}
 .invalid{
   border-style: solid;
   border-color: red;
