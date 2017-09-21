@@ -1,36 +1,42 @@
 <nav id="navbar" class="navbar">
   <ul>
     <li><a tabindex="3" (keyup.enter)="openNav()" (click)="resetResults(); openNav()"><div class="glyphicon glyphicon-menu-hamburger"></div></a></li>
-    <li><a tabindex="2" style="font-family: comic-sans; font-size: 14pt; font-weight: bold; outline:none" (keyup.enter)="closeNav()" (click)="closeNav()" [routerLink]="['/home']">Schimmel Coding Blog</a></li>
+    <li><a tabindex="2" style="font-family: comic-sans; font-size: 14pt; font-weight: bold; outline:none" (keyup.enter)="closeNav()" (click)="closeNav();" [routerLink]="['/home']">Schimmel Coding Blog</a></li>
     <li>
       <div class="search" (click)="closeNav()">
-        <input *ngIf="isLoggedIn" (click)="closeNav(); tree()" tabindex="1" id="search" style="width: 260px; outline: none" type="text" class="form-control search-box" placeholder="search schimmelcoding" ngControl="searchString" [(ngModel)]="searchString" (ngModelChange)=tree() (keyup.enter)="closeNav(); tree()">
+        <input *ngIf="isLoggedIn" (click)="closeNav();" (focus)="tree()" tabindex="1" id="search" style="width: 260px; outline: none" type="text" class="form-control search-box" placeholder="search schimmelcoding" ngControl="searchString" [(ngModel)]="searchString" (ngModelChange)=tree() (keyup.enter)="closeNav(); addToHistory(searchString); resetResults(); resetSearchString()">
       </div>
     </li>
-    <li><button *ngIf="isLoggedIn && searchString!=null && searchString!=''" class="glyphicon glyphicon-search" tabindex="1" id="search-button" (click)="closeNav(); resetResults(); search()"></button></li>
+    <li><button *ngIf="isLoggedIn && searchString!=null && searchString!=''" class="glyphicon glyphicon-search" tabindex="1" id="search-button" (click)="closeNav();  tree(); addToHistory(searchString); resetResults(); resetSearchString();;"></button></li>
   </ul>
 </nav>
 
 <!-- search results section -->
-<span [ngClass]="{hidden: searchString=='' || resultArray.length<1}" id="resultsBox">
-  <span *ngIf="resultArray.length>0" class="resultHeader">Articles <br></span>
+<span id="resultsBox">
   <!-- the following is to place results in a pretty box, hidden until needed -->
-  <span *ngIf="resultArray.length>0">
-    <span *ngFor="let item of resultArray">
-      <span class="glyphicon glyphicon-search" (mouseover)="underlineResult(item)" (mouseleave)="removeUnderlineFromResult(item)" (click)="navigateToResult(item)">&nbsp;</span>
-        <span *ngIf="resultArray.length>0" id="resultItem{{item}}" class="resultItemWrapper result" (click)="navigateToResult(item)">{{item}} <br></span>
+  <span *ngIf="searchString!=''" class="resultHeader">Articles <br></span>
+  <span *ngIf="resultArray.length<1 && searchString!=''" style="whitespace: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No results found</span>
+    <span *ngIf="searchString!=''">
+      <span *ngFor="let item of resultArray">
+        <span class="glyphicon glyphicon-search" title='search for "{{item}}"' (mouseover)="underlineResult(item)" style="cursor: pointer" (mouseleave)="removeUnderlineFromResult(item)" (click)="navigateToResult(item);"></span>
+        <span>&nbsp;&nbsp;</span>
+        <span *ngIf="resultArray.length>0" id="resultItem{{item}}" class="resultItemWrapper result" (mouseover)="underlineResult(item)" (mouseleave)="removeUnderlineFromResult(item)" (click)="navigateToResult(item);">{{item}}</span>
+        <br>
       </span>
     </span>
-  <hr *ngIf="resultArray.length>0;" style="border-color: #9a9a9a; margin: 2px; margin-top: 5px" width="240px;" size="3" noshade align="left">
+  <hr *ngIf="searchString!=''" style="border-color: #9a9a9a; margin: 2px; margin-top: 5px" width="240px;" size="3" noshade align="left">
   <!-- modify, and put result of other result categories here -->
-  <span *ngIf="resultArray.length>0" class="resultHeader">Other Thing <br></span>
-  <span *ngIf="resultArray.length>0">
-    <span *ngFor="let item of resultArray">
-      <span class="glyphicon glyphicon-search" (mouseover)="underlineResult(item)" (mouseleave)="removeUnderlineFromResult(item)" (click)="navigateToResult(item)">&nbsp;</span>
-        <span *ngIf="resultArray.length>0" id="resultItem{{item}}" class="resultItemWrapper result" (click)="navigateToResult(item)">{{item}} <br></span>
+  <span *ngIf="history.length>0" class="resultHeader">Recent Searches<br></span>
+    <span>
+      <span *ngFor="let item of history">
+        <span class="glyphicon glyphicon-search" title='search for "{{item}}"' (mouseover)="underlineResult(item, 2)" style="cursor: pointer" (mouseleave)="removeUnderlineFromResult(item,2)" (click)="navigateToResult(item)"></span>
+        <span>&nbsp;&nbsp;</span>
+        <span id="resultItem{{item}}2" class="resultItemWrapper result" (mouseover)="underlineResult(item,2)" (mouseleave)="removeUnderlineFromResult(item,2)" (click)="navigateToResult(item);">{{item}}</span>
+        <span style="cursor: pointer" class="pull-right glyphicon glyphicon-remove" title='remove "{{item}}" from history' (click)="removeItemFromHistory(item)"></span>
+        <br>
       </span>
     </span>
-</span>
+  </span>
 <!-- end of search results span spam -->
 
 <ngx-flash-messages *ngIf="!isLoggedIn"></ngx-flash-messages>

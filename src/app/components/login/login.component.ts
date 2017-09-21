@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   emptyPass: boolean = false;
   usernames: string[] = [];
   invalidLogin: boolean = false;
+  invalidText: string = ''
 
   constructor(private blogservice: BlogService, public router: Router, public appComponent: AppComponent, private flashMessagesService: FlashMessagesService){
     this.blogservice = blogservice;
@@ -44,7 +45,10 @@ export class LoginComponent implements OnInit {
      this.appComponent.closeNav()
    }
 
-  //checking if they leave something empty
+   /* checking if they leave something empty
+      if they leave more than one field empty, outline them red going from bottom up
+      this was the focus is put on first element left blank in the form
+   */
   checkCreds(){
     var valid = true;
     this.invalidLogin = false;
@@ -55,6 +59,7 @@ export class LoginComponent implements OnInit {
       document.getElementById("password").focus();
       console.log("enter pass");
       this.emptyPass = true;
+      this.invalidLogin = true;
       valid = false;
     }
     if(this.username == ""){
@@ -62,6 +67,7 @@ export class LoginComponent implements OnInit {
       console.log("enter user");
       this.emptyUser = true;
       valid = false;
+      this.invalidLogin = true;
     }
     return valid;
   }
@@ -73,69 +79,67 @@ export class LoginComponent implements OnInit {
     var dbrole: number;
 
     //use the following to use actual login checks
-    // uses service to connect to server and verify login
-    if (this.appComponent.isLoggedIn == false) {
-      console.log(this.appComponent.isLoggedIn)
+    //uses service to connect to server and verify login
+    // if (this.appComponent.isLoggedIn == false) {
+    //   console.log(this.appComponent.isLoggedIn)
       if(this.checkCreds()){
         this.blogservice.getLogin(this.username, this.password).subscribe( data => {
-          dbusername = data.username;
-          dbpassword = data.password;
-          dbrole = data.role_id;
+          // dbusername = data.username;
+          // dbpassword = data.password;
+          // dbrole = data.role_id;
 
-          console.log("logged in as: ", JSON.stringify(data));
-          if (this.appComponent.isLoggedIn == true) {
-            console.log('Now logging in')
-            this.appComponent.flipLogin()
-            // TODO say who logged in as?
-            this.router.navigate(['/home']);
-          } else {
-            this.invalidLogin = true;
-            this.username = null;
-            this.password = null;
-            this.instructLogin('Username or password incorrect. Please try again.');
-            if(this.username == null)
-              document.getElementById('username').focus();
-            else if(this.password == null)
-              document.getElementById('password').focus();
-          }
+          // console.log("logged in as: ", JSON.stringify(data));
+          // if (this.appComponent.isLoggedIn == true) {
+          //   console.log('Now logging in')
+          //   this.appComponent.flipLogin()
+          //   // TODO say who logged in as?
+          //   this.router.navigate(['/home']);
+          // } else {
+          //   this.invalidLogin = true;
+          //   this.username = '';
+          //   this.password = '';
+          //   this.instructLogin('Username or password incorrect. Please try again.');
+          //   if(this.username == '')
+          //     document.getElementById('username').focus();
+          //   else if(this.password == '')
+          //     document.getElementById('password').focus();
+          // }
         })
-      }
-    }
+       }
+    // }
 
 
     //below temporarily ignores login to test pages
-    // if (this.appComponent.isLoggedIn == false) {
-    //   console.log(this.appComponent.isLoggedIn)
-    //   if(this.checkCreds()){
-    //     if (this.username == "gg"){
-    //       this.invalidLogin = true;
-    //       this.username = null;
-    //       this.password = null;
-    //       this.instructLogin('Username or password incorrect. Please try again.');
-    //       if(this.username == null){
-    //         document.getElementById('username').focus();
-    //       }
-    //       else if(this.password == null){
-    //         document.getElementById('password').focus();
-    //       }
-    //     } else {
-    //       console.log("logging in");
-    //       this.appComponent.flipLogin();
-    //       console.log(this.appComponent.isLoggedIn)
-    //       this.router.navigate(['/home'])
-    //     }
-    //   }
-    // }
+  //   if (this.appComponent.isLoggedIn == false) {
+  //     console.log(this.appComponent.isLoggedIn)
+  //     if(this.checkCreds()){
+  //       if (this.username == "gg"){
+  //         this.invalidLogin = true;
+  //         this.username = '';
+  //         this.password = '';
+  //         this.instructLogin('Username or password incorrect. Please try again.');
+  //         if(this.username == ''){
+  //           document.getElementById('username').focus();
+  //         }
+  //         else if(this.password == ''){
+  //           document.getElementById('password').focus();
+  //         }
+  //       } else {
+  //         console.log("logging in");
+  //         this.appComponent.flipLogin();
+  //         console.log(this.appComponent.isLoggedIn)
+  //         this.router.navigate(['/home'])
+  //       }
+  //     }
+  //   }
+   }
+
+  instructLogin(text: string){
+    this.invalidText = text;
+    console.log(text)
   }
 
-
-  //display red flash message for 100 seconds at incorrect login
-  instructLogin(text: string){
-    // this.flashMessagesService.show(text, {
-    //     classes: ['alert-danger'],
-    //     timeout: 60000, //default is 3000
-    //   });
-      document.getElementById('invalid-text').innerText = text;
-    }
-
+  log(text:string){
+    text.trim() != '' ? console.log(text): console.log("nothing") ;
+  }
 }

@@ -6,7 +6,18 @@ button:focus,
 [contenteditable="true"]:focus {
     outline: none;
 }*/
-
+#wrapper{
+  text-align: center; vertical-align:middle; overflow-y: scroll;
+  scroll-behavior: smooth;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 5%;
+}
+.form-control::-webkit-input-placeholder
+{
+  color: pink !important;
+  opacity: 0.5 !important;
+}
 h1{
     color: white;
 }

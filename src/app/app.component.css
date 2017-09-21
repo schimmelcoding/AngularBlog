@@ -48,7 +48,6 @@ li a div:hover {
 
 .navbar {
   min-width: 700px;
-  overflow: hidden;
 }
 
 .search {
@@ -103,7 +102,7 @@ li a div:hover {
   /*left: 273px; probabaly not necessary to put here, just keeping in case for now */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
-  text-align: justify;
+  text-align: left;
   color: white;
   background-color: #333;
   margin-top: 50px;

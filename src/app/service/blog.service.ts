@@ -22,6 +22,6 @@ export class BlogService {
     let body = '{"username":"' + username + '", "password":"' + password + '"}';
     //alert(body)
     return this.http.post(this.baseurl + '/login', body) //body, options
-      .map((resp: Response) => resp.json()/*resp.json()*/);
+      .map((resp: Response) => alert(resp.json))/*resp.json()*/
     }
 }
