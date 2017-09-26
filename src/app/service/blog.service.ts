@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 //import { HttpClientModule } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+
+import { Observable } from 'rxjs';
+
 @Injectable()
 export class BlogService {
   baseurl: string = 'https://www.schimmelcoding.com/api/public/api';
@@ -10,18 +14,37 @@ export class BlogService {
 
   }
 
-  getUsernames(){
-    // let usernames: string[];
-    return this.http.get(this.baseurl + '/users/usernames')
-        .map((resp: Response) => resp.json());
-  }
+  // getUsernames(){
+  //   // let usernames: string[];
+  //   return this.http.get(this.baseurl + '/users/usernames')
+  //       .map((resp: Response) => resp.json());
+  // }
 
   getLogin(username: string, password: string){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers();
+    headers.append( "Content-Type", "application/json;charset=UTF-8");
     let options = new RequestOptions({ headers: headers });
-    let body = '{"username":"' + username + '", "password":"' + password + '"}';
-    //alert(body)
-    return this.http.post(this.baseurl + '/login', body) //body, options
-      .map((resp: Response) => alert(resp.json))/*resp.json()*/
-    }
+    //let body = '{"username":"' + username + '", "password":"' + password + '"}';
+    let body = JSON.stringify({
+      'username':username, 
+      'password':password
+      });
+    // alert(body);
+    return this.http.post(this.baseurl + '/login', body, { headers : headers }) //body, options
+      .map((resp: Response)=> resp.json())
+      .catch(this.handleErrorObservable)/*resp.json()*/
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    return body.data || {};
+  }
+
+  private handleErrorObservable (error: Response | any) {
+  console.error(error.message || error);
+  return Observable.throw(error.message || error);
+  }
+    
+
 }
+

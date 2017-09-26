@@ -61,7 +61,10 @@ export class LandingPageComponent implements OnInit {
       console.log(this.currentUrl)
       this.router.navigate(['/login']);
     }
-    else this.showCalendar();
+    else{
+     this.showCalendar();
+     this.appComponent.isHomePage = true;
+   }
   }
 
   instructLogin(){

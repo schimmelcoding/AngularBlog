@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { SocketIoModule, SocketIoConfig } from 'ng2-socket-io';
+
+
 
 const appRoutes:Routes = [
   { path:'admin', component: AdminPageComponent },
@@ -28,7 +31,7 @@ const appRoutes:Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    FlashMessagesModule,
+    FlashMessagesModule
   ],
   providers: [
     BlogService

@@ -25,6 +25,11 @@ export class LoginComponent implements OnInit {
   invalidLogin: boolean = false;
   invalidText: string = ''
 
+  //details
+  dbusername: string;
+  dbpassword: string;
+  dbrole: number;
+
   constructor(private blogservice: BlogService, public router: Router, public appComponent: AppComponent, private flashMessagesService: FlashMessagesService){
     this.blogservice = blogservice;
     this.router = router;
@@ -74,9 +79,6 @@ export class LoginComponent implements OnInit {
 
   //call service to login and stuff
   login(): void {
-    var dbusername: string;
-    var dbpassword: string;
-    var dbrole: number;
 
     //use the following to use actual login checks
     //uses service to connect to server and verify login
@@ -84,26 +86,23 @@ export class LoginComponent implements OnInit {
     //   console.log(this.appComponent.isLoggedIn)
       if(this.checkCreds()){
         this.blogservice.getLogin(this.username, this.password).subscribe( data => {
-          // dbusername = data.username;
-          // dbpassword = data.password;
-          // dbrole = data.role_id;
+          this.dbusername = data.username;
+          this.dbpassword = data.password;
+          this.dbrole = data.role_id;
 
-          // console.log("logged in as: ", JSON.stringify(data));
-          // if (this.appComponent.isLoggedIn == true) {
-          //   console.log('Now logging in')
-          //   this.appComponent.flipLogin()
-          //   // TODO say who logged in as?
-          //   this.router.navigate(['/home']);
-          // } else {
-          //   this.invalidLogin = true;
-          //   this.username = '';
-          //   this.password = '';
-          //   this.instructLogin('Username or password incorrect. Please try again.');
-          //   if(this.username == '')
-          //     document.getElementById('username').focus();
-          //   else if(this.password == '')
-          //     document.getElementById('password').focus();
-          // }
+          console.log('Now logging in')
+          if (this.appComponent.isLoggedIn == false) {
+            console.log("logged in as: " + data.first_name + " " + data.last_name);
+            this.appComponent.isLoggedIn = true;
+            //this.dbrole == 1 ? this.appComponent.isAdmin = true : this.appComponent.isAdmin = false;
+            this.router.navigate(['/home']);
+          } else {
+            this.invalidLogin = true;
+            this.username = '';
+            this.password = '';
+            this.instructLogin('Username or password incorrect. Please try again.');
+            document.getElementById('username').focus();
+           }
         })
        }
     // }

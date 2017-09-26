@@ -30,7 +30,8 @@ export class AppComponent {
   history:Array<string> = new Array();
   emptyResults: boolean = false;
   isLoggedIn: boolean = false;
-  isHomePage: boolean;
+  isAdmin: boolean = false;
+  isHomePage: boolean = false;
   searchString: string = '';
   routes: any[];
   @Output() public clickOutside = new EventEmitter<MouseEvent>();
@@ -93,10 +94,12 @@ export class AppComponent {
 
   getIsLoggedIn(){
     if(this.isLoggedIn){return true;}
-    else {
-      return false;
-    }
+    else return false;
   }
+  getIsAdmin(){
+    return this.isAdmin;
+  }
+
 
 /* sidenav specific methods */
 //Set the width of the side navigation to 200px
@@ -135,6 +138,7 @@ export class AppComponent {
         this.router.navigate(['/'+location]);
       }
     }
+    this.removeItemFromHistory(location);
     this.addToHistory(location);
   }
 
@@ -292,7 +296,8 @@ export class AppComponent {
         console.log("nope")
       }
     }
-
+    if (this.history.length < 1 && this.searchString.trim() == '')
+      document.getElementById('resultsBox').style.visibility = "hidden";
   }
 
   underlineResult(item: string, group?: number){
