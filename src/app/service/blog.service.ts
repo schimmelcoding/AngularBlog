@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class BlogService {
-  baseurl: string = 'https://www.schimmelcoding.com/api/public/api';
+  baseurl: string = 'http://schimmelcoding.000webhostapp.com/api/public/api';
+  //baseurl: string = 'https://www.schimmelcoding.com/api/public/api';
 
   constructor(private http: Http) {
 
@@ -26,7 +27,7 @@ export class BlogService {
     let options = new RequestOptions({ headers: headers });
     //let body = '{"username":"' + username + '", "password":"' + password + '"}';
     let body = JSON.stringify({
-      'username':username, 
+      'username':username,
       'password':password
       });
     // alert(body);
@@ -44,7 +45,6 @@ export class BlogService {
   console.error(error.message || error);
   return Observable.throw(error.message || error);
   }
-    
+
 
 }
-
