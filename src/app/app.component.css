@@ -47,7 +47,12 @@ li a div:hover {
 }
 
 .navbar {
-  min-width: 700px;
+  min-width: 100%;
+  margin-top: -1px;
+  /*
+  position: fixed;
+  margin-top: -65px;
+  */
 }
 
 .search {

@@ -2,7 +2,6 @@
   <h1>
     Welcome to {{title}}!
   </h1>
-  <p id="invalid-text" style="color: red; " *ngIf="invalidLogin && username=='' && password==''">{{invalidText}}</p>
   <div style="text-align: center;">
     <input class="input" [ngClass]="{invalid: emptyUser, 'not-empty': username!=''}" tabindex="1" type="text" name="username" [(ngModel)]="username" id="username"
            ngControl="username" placeholder="username"/>
@@ -21,4 +20,6 @@
     <span style="color: white;">&nbsp;|&nbsp;</span>
     <a tabindex="1" class="link" style="font-weight: bold;" href="http://apps.thecodepost.org/trex/trex.html" (click)="closeNav()" (keyup.enter)="closeNav()">forgot password</a>
   </div>
+
+  <p id="invalid-text" style="color: red; font-weight: bold; font-size: 16pt; " *ngIf="invalidLogin && username=='' && password==''">{{invalidText}}</p>
 </div>

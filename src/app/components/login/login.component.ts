@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
       this.currentUrl = this.router.url;
       console.log(this.currentUrl);
       document.getElementById('username').focus();
+    } else if (this.appComponent.getIsLoggedIn() == true) {
+      this.router.navigate(['/home'])
     }
   }
    closeNav() {
@@ -79,7 +81,6 @@ export class LoginComponent implements OnInit {
 
   //call service to login and stuff
   login(): void {
-
     //use the following to use actual login checks
     //uses service to connect to server and verify login
     if (this.appComponent.isLoggedIn == false) {
@@ -90,11 +91,12 @@ export class LoginComponent implements OnInit {
           this.dbpassword = data.password;
           this.dbrole = data.role_id;
 
-          console.log('Now logging in')
-          if (this.appComponent.isLoggedIn == false) {
+          //if (this.dbusername != undefined $$)
+          if (this.dbusername != undefined && this.dbusername != null) {
+            console.log('Now logging in')
             console.log("logged in as: " + data.first_name + " " + data.last_name);
             this.appComponent.login();
-            //this.dbrole == 1 ? this.appComponent.isAdmin = true : this.appComponent.isAdmin = false;
+            // TODO this.dbrole == 1 ? this.appComponent.isAdmin = true : this.appComponent.isAdmin = false;
             this.router.navigate(['/home']);
           } else {
             this.invalidLogin = true;
@@ -102,38 +104,36 @@ export class LoginComponent implements OnInit {
             this.password = '';
             this.instructLogin('Username or password incorrect. Please try again.');
             document.getElementById('username').focus();
-           }
+          }
         })
        }
-     }
-    // }
-
+     } //end real login
 
     //below temporarily ignores login to test pages
-  //   if (this.appComponent.isLoggedIn == false) {
-  //     console.log(this.appComponent.isLoggedIn)
-  //     if(this.checkCreds()){
-  //       if (this.username == "gg"){
-  //         this.invalidLogin = true;
-  //         this.username = '';
-  //         this.password = '';
-  //         this.instructLogin('Username or password incorrect. Please try again.');
-  //         if(this.username == ''){
-  //           document.getElementById('username').focus();
-  //         }
-  //         else if(this.password == ''){
-  //           document.getElementById('password').focus();
-  //         }
-  //       } else {
-  //         console.log("logging in");
-  //         this.appComponent.logout();
-  //         console.log(this.appComponent.isLoggedIn)
-  //         this.router.navigate(['/home'])
-  //       }
-  //     }
-  //   }
+    // if (this.appComponent.isLoggedIn == false) {
+    //   console.log(this.appComponent.isLoggedIn)
+    //   if(this.checkCreds()){
+    //     if (this.username == "gg"){
+    //       this.invalidLogin = true;
+    //       this.username = '';
+    //       this.password = '';
+    //       this.instructLogin('Username or password incorrect. Please try again.');
+    //       if(this.username == ''){
+    //         document.getElementById('username').focus();
+    //       }
+    //       else if(this.password == ''){
+    //         document.getElementById('password').focus();
+    //       }
+    //     } else {
+    //       console.log("logging in");
+    //       this.appComponent.login();
+    //       console.log(this.appComponent.isLoggedIn)
+    //       this.router.navigate(['/home'])
+    //     }
+    //   }
+    // } //end fake login
 
-}
+} //end login function
 
   instructLogin(text: string){
     this.invalidText = text;
