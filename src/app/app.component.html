@@ -51,5 +51,5 @@
   <a class="nav-item" tabindex="3" (click)="closeNav()" [routerLink]="['/home']">Home</a>
   <a *ngIf="isLoggedIn" tabindex="3" class="nav-item" (click)="closeNav()" [routerLink]="['/admin']">Admin</a>
   <a *ngIf="!isLoggedIn" class="nav-item" (click)="closeNav();" [routerLink]="['/login']">Login</a>
-  <a *ngIf="isLoggedIn" tabindex="3" class="nav-item" (click)="closeNav(); flipLoginButton(); " [routerLink]="['/login']">Logout</a>
+  <a *ngIf="isLoggedIn" tabindex="3" class="nav-item" (click)="closeNav(); logout(); " [routerLink]="['/login']">Logout</a>
 </span>

@@ -82,8 +82,8 @@ export class LoginComponent implements OnInit {
 
     //use the following to use actual login checks
     //uses service to connect to server and verify login
-    // if (this.appComponent.isLoggedIn == false) {
-    //   console.log(this.appComponent.isLoggedIn)
+    if (this.appComponent.isLoggedIn == false) {
+      console.log(this.appComponent.isLoggedIn)
       if(this.checkCreds()){
         this.blogservice.getLogin(this.username, this.password).subscribe( data => {
           this.dbusername = data.username;
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
           console.log('Now logging in')
           if (this.appComponent.isLoggedIn == false) {
             console.log("logged in as: " + data.first_name + " " + data.last_name);
-            this.appComponent.isLoggedIn = true;
+            this.appComponent.login();
             //this.dbrole == 1 ? this.appComponent.isAdmin = true : this.appComponent.isAdmin = false;
             this.router.navigate(['/home']);
           } else {
@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
            }
         })
        }
+     }
     // }
 
 
@@ -125,13 +126,14 @@ export class LoginComponent implements OnInit {
   //         }
   //       } else {
   //         console.log("logging in");
-  //         this.appComponent.flipLogin();
+  //         this.appComponent.logout();
   //         console.log(this.appComponent.isLoggedIn)
   //         this.router.navigate(['/home'])
   //       }
   //     }
   //   }
-   }
+
+}
 
   instructLogin(text: string){
     this.invalidText = text;

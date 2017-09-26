@@ -84,8 +84,15 @@ export class AppComponent {
     }
   }
 
-  flipLogin() {
-    this.isLoggedIn = !this.isLoggedIn;
+  login() {
+    if (this.isLoggedIn == false) {
+      this.isLoggedIn = true;
+    }
+  }
+  logout() {
+    if (this.isLoggedIn == true) {
+      this.isLoggedIn = false;
+    }
   }
 
   focusSearch(){
