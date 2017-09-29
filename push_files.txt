@@ -1,0 +1,39 @@
+#!/bin/sh
+HOST='files.000webhost.com'
+USER='schimmelcoding'
+PASSWD='saize515'
+FAVICON='favicon.ico'
+#ASSETS='assets'
+INDEX='index.html'
+INLINEJS='inline.bundle.js'
+INLINEMAP='inline.bundle.js.map'
+MAINJS='main.bundle.js'
+MAINMAP='main.bundle.js.map'
+POLYFILLSJS='polyfills.bundle.js'
+POLYFILLSMAP='polyfills.bundle.js.map'
+STYLESJS='styles.bundle.js'
+STYLESMAP='styles.bundle.js.map'
+VENDORJS='vendor.bundle.js'
+VENDORMAP='vendor.bundle.js.map'
+
+
+
+ftp -v -p -n $HOST <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWD
+cd public_html
+put $FAVICON
+put $INDEX
+put $INLINEJS
+put $INLINEMAP
+put $MAINJS
+put $MAINMAP
+put $POLYFILLSJS
+put $POLYFILLSMAP
+put $STYLESJS
+put $STYLESMAP
+put $VENDORJS
+put $VENDORMAP
+quit
+END_SCRIPT
+exit 0
