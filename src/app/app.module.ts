@@ -10,13 +10,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { SocketIoModule, SocketIoConfig } from 'ng2-socket-io';
-
-
+import { RegisterComponent } from './components/register/register.component';
 
 const appRoutes:Routes = [
   { path:'admin', component: AdminPageComponent },
   { path:'login', component: LoginComponent },
   { path: 'home', component: LandingPageComponent},
+  { path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({
@@ -25,6 +25,7 @@ const appRoutes:Routes = [
     LoginComponent,
     AdminPageComponent,
     LandingPageComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

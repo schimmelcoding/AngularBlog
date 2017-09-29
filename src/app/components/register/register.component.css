@@ -1,0 +1,77 @@
+.wrapper {
+  font-size: 18pt;
+  position: absolute;
+  width: 310px;
+  height: 590px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -275px 0 0 -150px;
+  background: #333;
+}
+
+.inputDiv{
+}
+
+.inputBox{
+  /*text-align: center;*/
+ margin-bottom: 3px;
+ margin-left: 20px;
+ /*border-radius:9px;
+ -moz-border-radius:9px;
+ -webkit-border-radius:9px;*/
+ border-color: lightblue;
+ padding-left: 12px;
+}
+.inputBox:focus{
+  /*outline-width: 0;
+  outline: none;*/
+  outline-color: orange;
+}
+
+.button {
+  background-color: white;
+  color: black;
+  border: 2px solid orange;
+  margin-top: 15px;
+}
+.button:hover{
+  background-color: orange;
+  transition: .5s;
+
+}
+.button:focus{
+  outline: none;
+  outline-width: 0px;
+  background-color: orange;
+  transition: .5s;
+}
+
+.label{
+  margin-top: 8px;
+  margin-bottom: -2px;
+  margin-left: 10px;
+  font-size: 12pt;
+}
+.error{
+  color: red;
+  font-size: 11pt;
+}
+
+#submitRegistration{
+  margin-left: 10px;
+}
+#resetRegistration{
+  margin-left: 14px;
+  /*margin-right: 10px;*/
+}
+#cancelRegistration{
+  margin-right: 10px;
+}
+.invisButton{
+  background:transparent;
+  border:none;
+  outline:none;
+  width: 0;
+  height: 0;
+}

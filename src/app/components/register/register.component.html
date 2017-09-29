@@ -1,0 +1,32 @@
+<div class="wrapper">
+
+    <label class="label pull-left" for="firstNameInput">First Name: <span *ngIf="isInvalidFirst" class="error" style="margin-left: 35px;">Field can't be empty</span></label>
+    <input [(ngModel)]="firstName" ngControl="firstName" class="inputBox pull-left" tabindex="1" type="text" id="firstNameInput" placeholder="First Name"/>
+
+    <label class="label pull-left" for="lastNameInput">Last Name: <span *ngIf="isInvalidLast" class="error" style="margin-left: 37px;">Field can't be empty</span></label>
+    <input [(ngModel)]="lastName" ngControl="lastName" class="inputBox pull-left" tabindex="1" type="text" id="lastNameInput" placeholder="Last Name"/>
+
+    <label class="label pull-left" for="emailInput">Email: <span *ngIf="isInvalidEmail" class="error" style="margin-left: 77px;">Field can't be empty</span></label>
+    <input [(ngModel)]="email" ngControl="email"  class="inputBox pull-left" tabindex="1" type="text" id="emailInput" placeholder="Email"/>
+
+    <label class="label pull-left" for="confirmEmailInput">Confirm Email: <span *ngIf="isInvalidConfirmEmail" class="error" style="margin-left: 11px;">Field can't be empty</span></label>
+    <input [(ngModel)]="confirmEmail" ngControl="confirmEmail" class="inputBox pull-left" tabindex="1" type="text" id="confirmEmailInput" placeholder="Confirm Email"/>
+
+    <label class="label pull-left" for="usernameInput">Username: <span *ngIf="isInvalidUser" class="error" style="margin-left: 40px;">Field can't be empty</span></label>
+    <input [(ngModel)]="username" ngControl="username" class="inputBox pull-left" tabindex="1" type="text" id="usernameInput" placeholder="Username"/>
+
+    <label class="label pull-left" for="passwordInput">Password: <span *ngIf="isInvalidPass" class="error" style="margin-left: 42px;">Field can't be empty</span></label>
+    <input [(ngModel)]="password" ngControl="password" class="inputBox pull-left" tabindex="1" type="password" id="passwordInput" placeholder="Password"/>
+
+    <label class="label pull-left" for="confirmPasswordInput">Confirm Pass: <span *ngIf="isInvalidConfirmPass" class="error" style="margin-left: 16px;">Field can't be empty</span></label>
+    <input (keyup.enter)="validate()" [(ngModel)]="confirmPassword" ngControl="confirmPassword" class="inputBox pull-left" tabindex="1" type="password" id="confirmPasswordInput" placeholder="Confirm Password"/>
+
+    <div class="buttonDiv">
+      <button (click)="validate()" (keyup.enter)="validate()" class="button pull-left" tabindex="1" type="submit" name="submit" id="submitRegistration">Submit</button>
+      <button (click)="clearFields()" class="button pull-left" tabindex="1" type="submit" name="reset" id="resetRegistration">Reset</button>
+      <button [routerLink]="['/login']" class="button pull-right" tabindex="1" type="submit" name="cancel" id="cancelRegistration">Cancel</button>
+      <br>
+      <button class="invisButton" (keyup.tab)="tabToTop()" tabindex="1" type="button" name="button"></button>
+    </div>
+
+</div>

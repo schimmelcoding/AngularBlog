@@ -52,13 +52,9 @@ export class AppComponent {
     this.routes = this.router.config;
     // take only the path of each object, to create an array of actual useable routes
     for(var i = 0; i < this.routes.length; i++){
-      this.testArray.push(this.routes[i].path);
+      this.testArray.push(this.routes[i].path)
     }
     console.log(this.testArray)
-    //remove so you can't search for login
-    this.testArray.splice(this.testArray.indexOf("login"),1)
-    console.log(this.testArray)
-
     this.arr = this.createSearchableArray();
   }
 
