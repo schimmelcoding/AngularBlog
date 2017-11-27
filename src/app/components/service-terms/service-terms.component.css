@@ -1,0 +1,30 @@
+.wrapper {
+  position: relative;
+  width: 70%;
+  height: 90%;
+  top: 10%;
+  left: 15%;
+  background: #333;
+  color: white;
+  text-align: center;
+}
+
+.paragraph{
+  margin-top: -4px;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  font-size: 11pt;
+  text-align: left;
+}
+
+.paragraphHead{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+  color: orange;
+  font-weight: bold;
+  font-size: 14pt;
+}

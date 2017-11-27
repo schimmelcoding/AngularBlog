@@ -53,3 +53,9 @@
   <a *ngIf="!isLoggedIn" class="nav-item" (click)="closeNav();" [routerLink]="['/login']">Login</a>
   <a *ngIf="isLoggedIn" tabindex="3" class="nav-item" (click)="closeNav(); logout(); " [routerLink]="['/login']">Logout</a>
 </span>
+
+<br>
+<footer
+  *ngIf="router.url == '/register'" style="position:fixed; top: 92%; left: 30%; color: white; font-size:12pt">
+  By registering an account, you agree to SchimmelCodingBlog's <a (click)="closeNav()" [routerLink]="['/terms']">terms of service</a>.
+</footer>

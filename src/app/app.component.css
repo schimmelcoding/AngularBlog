@@ -99,6 +99,7 @@ li a div:hover {
 }*/
 /* search results box */
 #resultsBox {
+  visibility: hidden; /* change with javascript  */
   height: 0; /* change with javascript  */
   width: 260px; /*0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
