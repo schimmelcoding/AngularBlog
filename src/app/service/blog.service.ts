@@ -15,11 +15,11 @@ export class BlogService {
 
   }
 
-  // getUsernames(){
-  //   // let usernames: string[];
-  //   return this.http.get(this.baseurl + '/users/usernames')
-  //       .map((resp: Response) => resp.json());
-  // }
+  getUsernames(){
+    var usernames: string[];
+    return this.http.get(this.baseurl + '/users/usernames')
+        .map((resp: Response) => resp.json());
+  }
 
   getLogin(username: string, password: string){
     let headers = new Headers();

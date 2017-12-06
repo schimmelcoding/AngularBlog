@@ -18,7 +18,7 @@
   <div class="" style="padding-top: 3px;">
     <a tabindex="1" class="link" style="font-weight: bold;" [routerLink]="['/register']">register</a>
     <span style="color: white;">&nbsp;|&nbsp;</span>
-    <a tabindex="1" class="link" style="font-weight: bold;" href="http://apps.thecodepost.org/trex/trex.html">forgot password</a>
+    <a tabindex="1" class="link" style="font-weight: bold;" [routerLink]="['/passReset']">forgot password</a>
   </div>
 
   <p id="invalid-text" style="color: red; font-weight: bold; font-size: 16pt; " *ngIf="invalidLogin && username=='' && password==''">{{invalidText}}</p>

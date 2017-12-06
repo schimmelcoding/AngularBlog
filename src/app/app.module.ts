@@ -12,13 +12,15 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { SocketIoModule, SocketIoConfig } from 'ng2-socket-io';
 import { RegisterComponent } from './components/register/register.component';
 import { ServiceTermsComponent } from './components/service-terms/service-terms.component';
+import { LostPassComponent } from './components/lost-pass/lost-pass.component';
 
 const appRoutes:Routes = [
   { path:'admin', component: AdminPageComponent },
   { path:'login', component: LoginComponent },
-  { path: 'home', component: LandingPageComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'terms', component: ServiceTermsComponent},
+  { path: 'home', component: LandingPageComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'terms', component: ServiceTermsComponent },
+  { path: 'passReset', component: LostPassComponent },
 ];
 
 @NgModule({
@@ -29,6 +31,7 @@ const appRoutes:Routes = [
     LandingPageComponent,
     RegisterComponent,
     ServiceTermsComponent,
+    LostPassComponent,
   ],
   imports: [
     BrowserModule,

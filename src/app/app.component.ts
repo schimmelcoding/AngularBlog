@@ -37,14 +37,14 @@ export class AppComponent {
   @Output() public clickOutside = new EventEmitter<MouseEvent>();
 
   //TODO replace later
-  arr = new Array();
+  arr = new Array<any>();
   TrieSearch = require('trie-search');
   ts = new this.TrieSearch('name', {
     min: 1,
     splitOnRegEx: /\s/g // /\s/g is default regular expression to split all keys into tokens. By default this is any whitespace. Set to 'false' if you have whitespace in your keys!
   });
 
-  constructor(public router: Router, private elementRef: ElementRef, private flashMessagesService: FlashMessagesService) {
+  constructor(private blogService: BlogService, public router: Router, private elementRef: ElementRef, private flashMessagesService: FlashMessagesService) {
     this.flashMessagesService = flashMessagesService;
     this.elementRef = elementRef;
     this.router = router;
@@ -63,10 +63,12 @@ export class AppComponent {
     this.loadBrowserSpecificCSS();
     // cool background is cool
     document.getElementsByTagName('body')[0].style.backgroundImage='url("../../../assets/Backgrounds/space-wallpapers-6.jpg")';
-      if(this.getIsLoggedIn() == false){
+
+    if(this.getIsLoggedIn() == false){
           this.router.navigate(['/login']);
     }
   }
+
   //separating this in case the future calls for it
   loadBrowserSpecificCSS(){var userAgent = navigator.userAgent.toLowerCase();
     if (userAgent .indexOf('safari')!=-1){
@@ -474,9 +476,8 @@ export class AppComponent {
                 {name: "acetonitriles"},{name: "acetonuria"},{name: "acetonurias"},{name: "acetophenetidin"},{name: "acetophenetidins"},{name: "acetose"},{name: "acetous"},{name: "acetoxyl"},{name: "acetoxyls"},{name: "acetum"},{name: "acetyl"},{name: "acetylate"},{name: "acetylated"},{name: "acetylates"},{name: "acetylating"},{name: "acetylation"},{name: "acetylations"},{name: "acetylative"},{name: "acetylcholine"},{name: "acetylcholines"},{name: "acetylcholinesterase"},
                 {name: "acetylcholinesterases"},{name: "acetylene"},{name: "acetylenes"},{name: "acetylenic"},{name: "acetylic"},{name: "acetylide"},{name: "acetylides"},{name: "acetyls"},{name: "acetylsalicylate"},{name: "acetylsalicylates"},{name: "acetylsalicylic"},{name: "ach"},{name: "achaenia"},{name: "achaenium"},{name: "achaeniums"},{name: "achaenocarp"},{name: "achaenocarps"},{name: "achage"},{name: "achages"},{name: "achalasia"},{name: "achalasias"},{name: "achar"},
                 {name: "acharne"},{name: "achars"},{name: "acharya"},{name: "acharyas"},{name: "achates"},{name: "ache"},{name: "ached"},{name: "achene"},{name: "achenes"},{name: "achenia"},{name: "achenial"},{name: "achenium"},{name: "acheniums"},{name: "aches"},{name: "achier"},{name: "achiest"},{name: "achievable"},{name: "achieve"},{name: "achieved"},{name: "achievement"},{name: "achievements"},{name: "achiever"},{name: "achievers"},{name: "achieves"},{name: "achieving"},
-                {name: "achillea"}
+                {name: "achillea"},{name: "home"},{name: "register"},{name: "terms"}
     ];
-
     return arr;
   }
 }
