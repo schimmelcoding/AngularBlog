@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { BlogService } from '../../service/blog.service';
+import { NgModel } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../../app.component';
+import { FlashMessagesService } from 'ngx-flash-messages';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-register',
@@ -6,6 +15,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  currentUrl: string
+
   firstName: string = "";
   lastName: string = "";
   email: string = "";
@@ -21,9 +32,16 @@ export class RegisterComponent implements OnInit {
   isInvalidPass: boolean = false;
   isInvalidConfirmPass:boolean = false;
 
-  constructor() { }
+  constructor(private blogservice: BlogService, public router: Router, public appComponent: AppComponent){
+    this.blogservice = blogservice;
+    this.router = router;
+    this.appComponent = appComponent;
+  }
 
   ngOnInit() {
+    this.currentUrl = this.router.url;
+    console.log(this.currentUrl);
+    document.getElementById('firstNameInput').focus();
   }
 
   validate(){
@@ -85,7 +103,7 @@ export class RegisterComponent implements OnInit {
       check++
     } else { document.getElementById("firstNameInput").style.borderColor = "lightblue"; this.isInvalidFirst = false}
     if (check > 0)
-      return;
+      return 1;
 
     //check matching emails/passes
     else{
@@ -98,16 +116,15 @@ export class RegisterComponent implements OnInit {
       this.isInvalidConfirmPass = false;
       if(this.email != this.confirmEmail){
         alert("email no match");
-        return;
+        return 1;
       }
       if(this.password != this.confirmPassword){
         alert("password no match");
-        return;
+        return 1;
       }
     }
-    //registerfunction, redirect back to login
-    this.clearFields();
-    document.getElementById("firstNameInput").focus();
+
+    return 0;
   }
 
   clearFields(){
@@ -119,6 +136,17 @@ export class RegisterComponent implements OnInit {
     this.password = "";
     this.confirmPassword = "";
   }
+
+  registerNewUser() {
+    //registerfunction, redirect back to login
+    if (this.validate() == 0) {
+      this.blogservice.registerUser(this.firstName, this.lastName, this.username, this.password, this.email.toLowerCase()).subscribe(data => {
+        console.log(this.firstName + " registered"),
+        this.router.navigate(['/login'])
+      });
+    }
+  }
+
 
   tabToTop(){
     document.getElementById("firstNameInput").focus()

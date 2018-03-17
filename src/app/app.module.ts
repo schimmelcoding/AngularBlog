@@ -20,7 +20,7 @@ const appRoutes:Routes = [
   { path: 'home', component: LandingPageComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'terms', component: ServiceTermsComponent },
-  { path: 'passReset', component: LostPassComponent },
+  { path: 'pass_reset', component: LostPassComponent },
 ];
 
 @NgModule({

@@ -1,3 +1,7 @@
-<p>
-  lost-pass works!
-</p>
+<div class="">
+  <form>
+    <p>{{instructionText}}</p>
+    <input id="input-email" [(ngModel)]="email" ngControl="email" name="email"/>
+    <input id="submit" (click)="sendResetLink()" type="submit" name="submit_email">
+  </form>
+</div>

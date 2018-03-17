@@ -19,11 +19,11 @@
     <input [(ngModel)]="password" ngControl="password" class="inputBox pull-left" tabindex="1" type="password" id="passwordInput" placeholder="Password"/>
 
     <label class="label pull-left" for="confirmPasswordInput">Confirm Pass: <span *ngIf="isInvalidConfirmPass" class="error" style="margin-left: 16px;">Field can't be empty</span></label>
-    <input (keyup.enter)="validate()" [(ngModel)]="confirmPassword" ngControl="confirmPassword" class="inputBox pull-left" tabindex="1" type="password" id="confirmPasswordInput" placeholder="Confirm Password"/>
+    <input (keyup.enter)="registerNewUser()" [(ngModel)]="confirmPassword" ngControl="confirmPassword" class="inputBox pull-left" tabindex="1" type="password" id="confirmPasswordInput" placeholder="Confirm Password"/>
 
     <div class="buttonDiv">
-      <button (click)="validate()" (keyup.enter)="validate()" class="button pull-left" tabindex="1" type="submit" name="submit" id="submitRegistration">Submit</button>
-      <button (click)="clearFields()" class="button pull-left" tabindex="1" type="submit" name="reset" id="resetRegistration">Reset</button>
+      <button (click)="registerNewUser()" (keyup.enter)="registerNewUser()" class="button pull-left" tabindex="1" type="submit" name="submit" id="submitRegistration">Submit</button>
+      <button (click)="clearFields()" (keyup.enter)="clearFields()" class="button pull-left" tabindex="1" type="submit" name="reset" id="resetRegistration">Reset</button>
       <button [routerLink]="['/login']" class="button pull-right" tabindex="1" type="submit" name="cancel" id="cancelRegistration">Cancel</button>
       <br>
       <button class="invisButton" (keyup.tab)="tabToTop()" tabindex="1" type="button" name="button"></button>

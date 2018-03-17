@@ -63,10 +63,10 @@ export class AppComponent {
     this.loadBrowserSpecificCSS();
     // cool background is cool
     document.getElementsByTagName('body')[0].style.backgroundImage='url("../../../assets/Backgrounds/space-wallpapers-6.jpg")';
-
-    if(this.getIsLoggedIn() == false){
-          this.router.navigate(['/login']);
-    }
+    this.router.navigate(['/login']);
+    // if(this.getIsLoggedIn() == false){
+    //       this.router.navigate(['/login']);
+    // }
   }
 
   //separating this in case the future calls for it

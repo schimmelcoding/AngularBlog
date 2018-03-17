@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
    /* checking if they leave something empty
       if they leave more than one field empty, outline them red going from bottom up
-      this was the focus is put on first element left blank in the form
+      this will focus on the first element left blank in the form
    */
   checkCreds(){
     var valid = true;

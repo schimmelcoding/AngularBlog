@@ -128,6 +128,9 @@ li a div:hover {
   cursor: pointer;
 }
 
+.glyphicon-menu-hamburger{
+  cursor: pointer;
+}
 /* The side navigation menu */
 .sidenav {
   height: 100%; /* 100% Full-height */
@@ -157,6 +160,7 @@ li a div:hover {
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus{
   color: white;
+  cursor: pointer;
 }
 
 /* Position and style the close button (top right corner) */
