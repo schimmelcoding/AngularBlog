@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit {
   usernames: string[] = [];
   invalidLogin: boolean = false;
   invalidText: string = ''
-  
+
   // these two are are for if the vaue is "" AFTER editing the first time.
   // leaving them undefined for that reason
   emptyUser: boolean;
   emptyPass: boolean;
-  
+
   //details
   dbusername: string;
   dbpassword: string;
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-  
+
   }
 
   userChange(newValue: string) {

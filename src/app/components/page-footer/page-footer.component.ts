@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-footer',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageFooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) {this.router = router;}
 
   ngOnInit() {
+  }
+
+  testLocation() {
+    if (this.router.url == "/") {
+      return true;
+    }
+    else return false;
   }
 
 }

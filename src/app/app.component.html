@@ -1,4 +1,4 @@
-<nav id="navbar" class="navbar">
+<nav *ngIf="testLocation()==false" id="navbar" class="navbar">
   <ul>
     <li><a tabindex="3" (keyup.enter)="openNav()" (click)="resetResults(); openNav()"><div class="glyphicon glyphicon-menu-hamburger"></div></a></li>
     <li><a tabindex="2" style="font-family: comic-sans; font-size: 14pt; font-weight: bold; outline:none" (keyup.enter)="closeNav()" (click)="closeNav();" [routerLink]="['/home']">Schimmel Coding Blog</a></li>
@@ -61,4 +61,3 @@
 <footer>
   <app-page-footer></app-page-footer>
 </footer>
-
