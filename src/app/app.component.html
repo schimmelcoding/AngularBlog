@@ -39,8 +39,6 @@
   </span>
 <!-- end of search results span spam -->
 
-<ngx-flash-messages *ngIf="!isLoggedIn"></ngx-flash-messages>
-
 <div (click)="resetResults(); closeNav()">
   <router-outlet></router-outlet>
 </div>
@@ -55,7 +53,12 @@
 </span>
 
 <br>
-<footer
+<!-- <footer
   *ngIf="router.url == '/register'" style="position:fixed; top: 92%; left: 34%; color: white; font-size:12pt">
   By registering an account, you agree to SchimmelCodingBlog's <a (click)="closeNav()" [routerLink]="['/terms']">terms of service</a>.
+</footer> -->
+
+<footer>
+  <app-page-footer></app-page-footer>
 </footer>
+

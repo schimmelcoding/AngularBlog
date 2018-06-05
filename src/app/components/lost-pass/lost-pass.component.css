@@ -1,0 +1,10 @@
+.main{
+    /* padding-top: 5%; */
+}
+
+@media(min-width: 768) {
+    .main{
+        /* margin-top: -5%; */
+        padding-top: 5%;
+    }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BlogService } from '../../service/blog.service';
 import { NgModel } from '@angular/forms';
@@ -17,14 +17,17 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent implements OnInit {
   currentUrl: string
   title = 'Schimmel Coding Blog';
-  username: string = '';
-  password: string = '';
-  emptyUser: boolean = false;
-  emptyPass: boolean = false;
+  username: string;
+  password: string;
   usernames: string[] = [];
   invalidLogin: boolean = false;
   invalidText: string = ''
-
+  
+  // these two are are for if the vaue is "" AFTER editing the first time.
+  // leaving them undefined for that reason
+  emptyUser: boolean;
+  emptyPass: boolean;
+  
   //details
   dbusername: string;
   dbpassword: string;
@@ -34,20 +37,36 @@ export class LoginComponent implements OnInit {
     this.blogservice = blogservice;
     this.router = router;
     this.appComponent = appComponent;
+    this.flashMessagesService = flashMessagesService;
   }
 
   ngOnInit() {
-    this.appComponent.resetResults()
-    if(this.appComponent.getIsLoggedIn() == false){
-      //this.instructLogin('Not logged in. Please login to view content.');
-      this.appComponent.resetResults()
-      this.currentUrl = this.router.url;
-      console.log(this.currentUrl);
-      document.getElementById('username').focus();
-    } else if (this.appComponent.getIsLoggedIn() == true) {
-      this.router.navigate(['/home'])
-    }
+  
   }
+
+  userChange(newValue: string) {
+    this.username = newValue;
+    if (this.username == null || this.username == '') {
+      this.emptyUser = true;
+      document.getElementById('username').style.borderColor = "red";
+    } else {
+      this.emptyUser = false;
+      document.getElementById('username').style.borderColor = "#7A8086";
+    }
+    console.log(this.username)
+  }
+  passChange(newValue) {
+    this.password = newValue;
+    if (this.password == null || this.password == '') {
+      this.emptyPass = true;
+      document.getElementById('password').style.borderColor = "red";
+    } else {
+      this.emptyPass = false;
+      document.getElementById('password').style.borderColor = "#7A8086";
+    }
+    console.log(this.password)
+  }
+
    closeNav() {
      this.appComponent.closeNav()
    }
@@ -59,22 +78,24 @@ export class LoginComponent implements OnInit {
   checkCreds(){
     var valid = true;
     this.invalidLogin = false;
-    this.emptyUser = false;
-    this.emptyPass = false;
 
-    if(this.password == ""){
+    if(this.password == "" || this.password == null){
       document.getElementById("password").focus();
+      document.getElementById("password").style.borderColor = "red";
       console.log("enter pass");
       this.emptyPass = true;
       this.invalidLogin = true;
       valid = false;
+      this.instructLogin('There was a problem signing in. Please check your username and password.');
     }
-    if(this.username == ""){
+    if(this.username == "" || this.username == null){
       document.getElementById("username").focus();
+      document.getElementById("username").style.borderColor ="red";
       console.log("enter user");
       this.emptyUser = true;
       valid = false;
       this.invalidLogin = true;
+      this.instructLogin('There was a problem signing in. Please check your username and password.');
     }
     return valid;
   }
@@ -84,7 +105,7 @@ export class LoginComponent implements OnInit {
     //use the following to use actual login checks
     //uses service to connect to server and verify login
     if (this.appComponent.isLoggedIn == false) {
-      console.log(this.appComponent.isLoggedIn)
+      //console.log(this.appComponent.isLoggedIn)
       if(this.checkCreds()){
         this.blogservice.getLogin(this.username, this.password).subscribe( data => {
           this.dbusername = data.username;
@@ -102,7 +123,7 @@ export class LoginComponent implements OnInit {
             this.invalidLogin = true;
             this.username = '';
             this.password = '';
-            this.instructLogin('Username or password incorrect. Please try again.');
+            this.instructLogin('There was a problem signing in. Please check your username and password.');
             document.getElementById('username').focus();
           }
         })
@@ -117,7 +138,7 @@ export class LoginComponent implements OnInit {
     //       this.invalidLogin = true;
     //       this.username = '';
     //       this.password = '';
-    //       this.instructLogin('Username or password incorrect. Please try again.');
+    //       this.instructLogin('username or password incorrect. Please try again.');
     //       if(this.username == ''){
     //         document.getElementById('username').focus();
     //       }

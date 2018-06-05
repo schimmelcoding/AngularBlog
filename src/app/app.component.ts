@@ -5,14 +5,11 @@ import { NgModel } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FlashMessagesService } from 'ngx-flash-messages';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { PageFooterComponent } from './components/page-footer/page-footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-//import { TrieSearch } from '../../node_modules/trie-search';
-// import { TrieNode } from './model/trie';
-
-
 
 @Component({
   selector: 'app-root',
@@ -23,7 +20,7 @@ import { CommonModule } from '@angular/common';
     },
 })
 export class AppComponent {
-  //static root: TrieNode = new TrieNode();
+  currentURL: string;
   testArray: string[] = new Array();
   searchWords: string[] = new Array();
   resultArray: Array<string> = new Array();
@@ -59,37 +56,44 @@ export class AppComponent {
   }
 
   ngOnInit(){
+   //document.getElementById("loading").style.visibility = "hidden";
     this.createTrie()
-    this.loadBrowserSpecificCSS();
+    //this.loadBrowserSpecificCSS();
     // cool background is cool
     document.getElementsByTagName('body')[0].style.backgroundImage='url("../../../assets/Backgrounds/space-wallpapers-6.jpg")';
-    this.router.navigate(['/login']);
-    // if(this.getIsLoggedIn() == false){
-    //       this.router.navigate(['/login']);
-    // }
+    if(this.getIsLoggedIn() == false){
+      // this.instructLogin();
+      this.currentURL = this.router.url;
+      if(this.currentURL!='/login') {
+        this.router.navigate(['/login'])
+      }
+    } else if (this.getIsLoggedIn() == true) {
+      this.router.navigate(['/home'])
+    }
   }
 
   //separating this in case the future calls for it
-  loadBrowserSpecificCSS(){var userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent .indexOf('safari')!=-1){
-      if(userAgent .indexOf('chrome')  > -1){
-        document.getElementById('resultsBox').style.left = "273px";
-      }else{
-        //browser is safari, add css
-        document.getElementById('resultsBox').style.left = "276px";
-      }
-    }
+  // loadBrowserSpecificCSS(){var userAgent = navigator.userAgent.toLowerCase();
+  //   if (userAgent.indexOf('safari')!=-1){
+  //     if(userAgent.indexOf('chrome')  > -1){
+  //       document.getElementById('resultsBox').style.left = "273px";
+  //     }else{
+  //       //browser is safari, add css
+  //       document.getElementById('resultsBox').style.left = "276px";
+  //     }
+  //   }
+  // }
+  instructLogin(){
+    this.flashMessagesService.show('Not logged in. Please login to view content.', {
+      classes: ['alert-info'],
+      timeout: 4000, //default is 3000
+    });
   }
-
   login() {
-    if (this.isLoggedIn == false) {
-      this.isLoggedIn = true;
-    }
+    this.isLoggedIn = true;
   }
   logout() {
-    if (this.isLoggedIn == true) {
-      this.isLoggedIn = false;
-    }
+    this.isLoggedIn = false;
   }
 
   focusSearch(){
@@ -326,9 +330,6 @@ export class AppComponent {
   }
   createSearchableArray(){
     var arr = [
-                {name: "me"},
-                {name: "me"},
-                {name: "me"},
                 {name: "me"},
                 {name: "me YOU"},
                 {name: "you ME"},

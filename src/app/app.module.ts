@@ -13,14 +13,15 @@ import { SocketIoModule, SocketIoConfig } from 'ng2-socket-io';
 import { RegisterComponent } from './components/register/register.component';
 import { ServiceTermsComponent } from './components/service-terms/service-terms.component';
 import { LostPassComponent } from './components/lost-pass/lost-pass.component';
+import { PageFooterComponent } from './components/page-footer/page-footer.component';
 
 const appRoutes:Routes = [
   { path:'admin', component: AdminPageComponent },
   { path:'login', component: LoginComponent },
-  { path: 'home', component: LandingPageComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'terms', component: ServiceTermsComponent },
-  { path: 'pass_reset', component: LostPassComponent },
+  { path:'home', component: LandingPageComponent },
+  { path:'register', component: RegisterComponent },
+  { path:'terms', component: ServiceTermsComponent },
+  { path:'lost_pass', component: LostPassComponent },
 ];
 
 @NgModule({
@@ -32,6 +33,7 @@ const appRoutes:Routes = [
     RegisterComponent,
     ServiceTermsComponent,
     LostPassComponent,
+    PageFooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -79,7 +79,7 @@ export class BlogService {
     let body = JSON.stringify({
       'email': email.toLowerCase(),
     });
-    return this.http.post(this.baseurl + '/pass_reset', body, { headers : headers }) //body, options
+    return this.http.post(this.baseurl + '/send_link', body, { headers : headers }) //body, options
       .catch(this.handleErrorObservable)/*resp.json()*/
   }
 }

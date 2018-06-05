@@ -54,17 +54,17 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appComponent.resetResults()
-    if(this.appComponent.getIsLoggedIn() == false){
-      this.instructLogin();
-      this.currentUrl = this.router.url;
-      console.log(this.currentUrl)
-      this.router.navigate(['/login']);
-    }
-    else{
-     this.showCalendar();
-     this.appComponent.isHomePage = true;
-   }
+  //   this.appComponent.resetResults()
+  //   if(this.appComponent.getIsLoggedIn() == false){
+  //     this.instructLogin();
+  //     this.currentUrl = this.router.url;
+  //     console.log(this.currentUrl)
+  //     this.router.navigate(['/login']);
+  //   }
+  //   else{
+  //    this.showCalendar();
+  //    this.appComponent.isHomePage = true;
+  //  }
   }
 
   instructLogin(){
